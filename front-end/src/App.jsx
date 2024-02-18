@@ -5,6 +5,7 @@ import Signin from "./pages/Signin";
 import HomeScreen from "./components/HomeScreen";
 import CreateLogs from "./components/CreateLogs";
 import Profile from "./components/Profile";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -12,9 +13,30 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signin />} />
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/logs" element={<CreateLogs />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <HomeScreen />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/logs"
+          element={
+            <ProtectedRoute>
+              <CreateLogs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

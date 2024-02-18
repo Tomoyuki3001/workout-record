@@ -1,22 +1,35 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/api/user/login", { email, password })
-      .then((result) => {
-        if (result.data.message === "Successful") {
-          navigate("/");
-        }
-      })
-      .catch((error) => console.log("Error", error));
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/user/login",
+        { email, password }
+      );
+      if (response.data.success) {
+        dispatch(setUser());
+        toast.success(response.data.message);
+        localStorage.setItem("token", response.data.data);
+        navigate("/");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Something is wrong");
+      console.log("error", error);
+    }
   };
   return (
     <div className="flex flex-col items-center text-center justify-center h-screen px-10">

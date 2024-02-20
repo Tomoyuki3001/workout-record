@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 const HomeScreen = () => {
   const { user } = useSelector((state) => state.user);
   const userName = user && user.name;
-  const userHeight = user && user.height;
-  const userWeight = user && user.weight;
   const navigate = useNavigate();
   const logout = () => {
     localStorage.clear();
@@ -24,9 +22,6 @@ const HomeScreen = () => {
             Log out
           </button>
           <h2>Hello, {userName}</h2>
-          <p>Height: {userHeight}</p>
-          <p>Weight: {userWeight}</p>
-          <p>BMI</p>
         </div>
         <div className="flex flex-col justify-center items-center text-center">
           <ul>

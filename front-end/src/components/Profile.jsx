@@ -49,8 +49,6 @@ const Profile = () => {
       <div className="flex flex-col justify-center items-center text-center">
         <p>User name</p>
         <p>User email</p>
-        <p>User height</p>
-        <p>User weight</p>
         <p>Favorite training</p>
         <div className="flex flex-col">
           <button onClick={editProfile}>Edit</button>

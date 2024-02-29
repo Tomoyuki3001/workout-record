@@ -12,6 +12,8 @@ const CreateLogs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let id = Math.floor(1000000000 + Math.random() * 9000000000);
+    id.toString().substring(0, 10);
     const token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -20,7 +22,7 @@ const CreateLogs = () => {
     axios
       .post(
         "http://localhost:5000/api/log/create-user-log",
-        { date, type },
+        { date, type, id },
         { headers }
       )
       .then(() => {
@@ -52,9 +54,9 @@ const CreateLogs = () => {
     navigate("/log-edit", { state: { logWithSpecificDate } });
   };
 
-  const logDelete = async (date) => {
+  const logDelete = async (id) => {
     const token = localStorage.getItem("token");
-    const updatedLogs = logs.filter((log) => log.date !== date);
+    const updatedLogs = logs.filter((log) => log.id !== id);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/log/delete-log-by-id",
@@ -144,7 +146,7 @@ const CreateLogs = () => {
                 </button>
                 <button
                   onClick={() => {
-                    logDelete(log.date);
+                    logDelete(log.id);
                   }}
                 >
                   Delete

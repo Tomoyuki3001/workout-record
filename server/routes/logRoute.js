@@ -25,7 +25,11 @@ router.post("/create-user-log", authMiddleware, async (req, res) => {
   try {
     const logExists = await LogModel.findOne({ userId: req.body.userId });
     if (!logExists) {
-      const newLogObj = { date: req.body.date, type: req.body.type };
+      const newLogObj = {
+        date: req.body.date,
+        type: req.body.type,
+        record: [],
+      };
       const array = [];
       array.push(newLogObj);
       const newLog = new LogModel({
@@ -62,6 +66,22 @@ router.post("/get-user-log-by-id", authMiddleware, async (req, res) => {
       success: false,
       error,
     });
+  }
+});
+
+router.post("/delete-log-by-id", authMiddleware, async (req, res) => {
+  const { userId, newLogs } = req.body;
+  try {
+    const updatedLogs = await LogModel.findOneAndUpdate(
+      {
+        userId: userId,
+      },
+      { logs: newLogs },
+      { new: true }
+    );
+    res.json(updatedLogs);
+  } catch (error) {
+    res.status(500).json({ error: "Could not update logs", details: error });
   }
 });
 

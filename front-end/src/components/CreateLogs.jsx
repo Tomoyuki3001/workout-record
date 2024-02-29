@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import BottomNavbar from "./BottomNavbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateLogs = () => {
   const [date, setDate] = useState("");
   const [type, setType] = useState("");
   const [logs, setLogs] = useState([]);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,9 +40,34 @@ const CreateLogs = () => {
           },
         }
       );
+      setUser(response.data.data[0]);
       setLogs(response.data.data[0].logs);
     } catch (error) {
       console.error("Error fetching logs:", error);
+    }
+  };
+
+  const logEdit = (date) => {
+    const logWithSpecificDate = logs.find((log) => log.date === date);
+    navigate("/log-edit", { state: { logWithSpecificDate } });
+  };
+
+  const logDelete = async (date) => {
+    const token = localStorage.getItem("token");
+    const updatedLogs = logs.filter((log) => log.date !== date);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/log/delete-log-by-id",
+        { newLogs: updatedLogs },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      fetchLogs();
+    } catch (error) {
+      console.error("Error updating logs:", error);
     }
   };
 
@@ -105,6 +133,22 @@ const CreateLogs = () => {
               <div className="text-left">
                 <p>Type</p>
                 <p>{log.type}</p>
+              </div>
+              <div>
+                <button
+                  onClick={() => {
+                    logEdit(log.date);
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => {
+                    logDelete(log.date);
+                  }}
+                >
+                  Delete
+                </button>
               </div>
             </li>
           ))}

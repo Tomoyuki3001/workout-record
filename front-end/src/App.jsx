@@ -6,6 +6,7 @@ import HomeScreen from "./components/HomeScreen";
 import CreateLogs from "./components/CreateLogs";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LogEdit from "./components/LogEdit";
 
 const App = () => {
   return (
@@ -34,6 +35,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/log-edit"
+          element={
+            <ProtectedRoute>
+              <LogEdit />
             </ProtectedRoute>
           }
         />

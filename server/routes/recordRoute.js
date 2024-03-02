@@ -22,7 +22,8 @@ router.get("/get-a-record", authMiddleware, async (req, res) => {
 });
 
 router.post("/create-training-record", authMiddleware, async (req, res) => {
-  const dateRecord = await RecordModel.findOne({ id: req.body.userId });
+  console.log("value", req.body);
+  const dateRecord = await RecordModel.findOne({ id: req.body.id });
   try {
     const updatedLogs = await LogModel.findOneAndUpdate(
       {

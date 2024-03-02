@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import BottomNavbar from "./BottomNavbar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import TrainingDetails from "./TrainingDetails";
 
 const CreateLogs = () => {
   const [date, setDate] = useState("");
   const [type, setType] = useState("");
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let id = Math.floor(1000000000 + Math.random() * 9000000000);
-    id.toString().substring(0, 10);
+    let randomNumber = Math.floor(1000000000 + Math.random() * 9000000000);
+    let id = randomNumber.toString().substring(0, 10);
     const token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -49,10 +48,9 @@ const CreateLogs = () => {
     }
   };
 
-  const logEdit = (date) => {
-    const logWithSpecificDate = logs.find((log) => log.date === date);
-    navigate("/log-edit", { state: { logWithSpecificDate } });
-  };
+  // const logEdit = (id, date) => {
+  //   console.log(id, date);
+  // };
 
   const logDelete = async (id) => {
     const token = localStorage.getItem("token");
@@ -79,82 +77,81 @@ const CreateLogs = () => {
 
   return (
     <div>
-      <div>
-        <div>
-          <h2>Create a daily log</h2>
-          <form
-            action=""
-            onSubmit={handleSubmit}
-            className="flex flex-col items-center text-center justify-center px-4 py-8 bg-gray-400 w-full"
-          >
-            <div className="flex flex-col items-start mb-5">
-              <label>Date</label>
-              <input
-                className="border"
-                type="date"
-                placeholder="Date"
-                onChange={(e) => {
-                  setDate(e.target.value);
-                }}
-              />
-            </div>
-            <div className="flex flex-col items-start mb-5">
-              <label>Categories</label>
-              <select
-                name="selectedType"
-                onChange={(e) => {
-                  setType(e.target.value);
-                }}
-              >
-                <option disabled selected value>
-                  {" "}
-                  -- select a type --{" "}
-                </option>
-                <option value="upper">Upper Body</option>
-                <option value="legs">Leg Workout</option>
-                <option value="cardio">Cardio</option>
-                <option value="full">Full Body</option>
-              </select>
-            </div>
-            <button className="px-4 py-2 bg-blue-400 text-white mb-4">
-              Add
-            </button>
-          </form>
-        </div>
-        <div>Add a training log</div>
-        <ul className="py-2 px-4 flex flex-col items-center text-center justify-center">
-          {logs.map((log) => (
-            <li
-              className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
-              key={log.date}
+      <div className="h-screen">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center text-center justify-center px-4 py-2 bg-gray-400 w-full h-1/5"
+        >
+          <div className="flex flex-col items-start mb-5">
+            <label>Date</label>
+            <input
+              className="border"
+              type="date"
+              placeholder="Date"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col items-start mb-5">
+            <label>Categories</label>
+            <select
+              name="selectedType"
+              onChange={(e) => {
+                setType(e.target.value);
+              }}
             >
-              <div className="text-left">
-                <p>Date</p>
-                <p>{log.date}</p>
-              </div>
-              <div className="text-left">
-                <p>Type</p>
-                <p>{log.type}</p>
-              </div>
-              <div>
-                <button
-                  onClick={() => {
-                    logEdit(log.date);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => {
-                    logDelete(log.id);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+              <option disabled selected value>
+                {" "}
+                -- select a type --{" "}
+              </option>
+              <option value="upper">Upper Body</option>
+              <option value="legs">Leg Workout</option>
+              <option value="cardio">Cardio</option>
+              <option value="full">Full Body</option>
+            </select>
+          </div>
+          <button className="px-4 py-2 bg-blue-400 text-white mb-4">Add</button>
+        </form>
+        <div className="h-4/5 bg-green-200">
+          <div className="pt-6 pb-24 px-4 flex flex-col items-center text-center overflow-y-scroll bg-blue-100 h-full">
+            {logs.map((log) => (
+              <details
+                className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
+                key={log.date}
+              >
+                <summary className="flex">
+                  <div className="text-left">
+                    <p>Date</p>
+                    <p>{log.date}</p>
+                  </div>
+                  <div className="text-left">
+                    <p>Type</p>
+                    <p>{log.type}</p>
+                  </div>
+                  <div>
+                    {/* <button
+                      onClick={() => {
+                        logEdit(log.id, log.date);
+                      }}
+                    >
+                      Add
+                    </button> */}
+                    <button
+                      onClick={() => {
+                        logDelete(log.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </summary>
+                <TrainingDetails />
+              </details>
+            ))}
+          </div>
+        </div>
       </div>
       <BottomNavbar />
     </div>

@@ -8,8 +8,31 @@ const CreateLogs = () => {
   const [type, setType] = useState("");
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
+  const [trainingArray, setTrainingArray] = useState([
+    "Cardio",
+    "Bench Press",
+    "Lat Pulldown",
+  ]);
 
-  const handleSubmit = (e) => {
+  const fetchLogs = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(
+        "http://localhost:5000/api/log/get-all-logs",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUser(response.data.data[0]);
+      setLogs(response.data.data[0].logs);
+    } catch (error) {
+      console.error("Error fetching logs:", error);
+    }
+  };
+
+  const createDaiyLog = (e) => {
     e.preventDefault();
     let randomNumber = Math.floor(1000000000 + Math.random() * 9000000000);
     let id = randomNumber.toString().substring(0, 10);
@@ -30,22 +53,23 @@ const CreateLogs = () => {
       .catch((error) => console.log("Error", error));
   };
 
-  const fetchLogs = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get(
-        "http://localhost:5000/api/log/get-all-logs",
+  const createTraining = (date, userId) => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+    axios
+      .post(
+        "http://localhost:5000/api/record/create-record",
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setUser(response.data.data[0]);
-      setLogs(response.data.data[0].logs);
-    } catch (error) {
-      console.error("Error fetching logs:", error);
-    }
+          date,
+          userId,
+        },
+        { headers }
+      )
+      .then(() => {})
+      .catch((error) => console.log("Error", error));
   };
 
   // const logEdit = (id, date) => {
@@ -80,7 +104,7 @@ const CreateLogs = () => {
       <div className="h-screen">
         <form
           action=""
-          onSubmit={handleSubmit}
+          onSubmit={createDaiyLog}
           className="flex flex-col items-center text-center justify-center px-4 py-2 bg-gray-400 w-full h-1/5"
         >
           <div className="flex flex-col items-start mb-5">
@@ -120,6 +144,9 @@ const CreateLogs = () => {
               <details
                 className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
                 key={log.date}
+                onClick={() => {
+                  createTraining(log.date, log.userId);
+                }}
               >
                 <summary className="flex">
                   <div className="text-left">
@@ -147,7 +174,7 @@ const CreateLogs = () => {
                     </button>
                   </div>
                 </summary>
-                <TrainingDetails />
+                <TrainingDetails trainingArray={trainingArray} user={user} />
               </details>
             ))}
           </div>

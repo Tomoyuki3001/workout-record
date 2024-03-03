@@ -1,8 +1,8 @@
 const mongoose = require("../config/dbConfig");
 
 const RecordSchema = new mongoose.Schema({
-  id: String,
-  name: String,
+  userId: String,
+  date: String,
   set: [],
 });
 

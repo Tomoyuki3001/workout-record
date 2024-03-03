@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-const TrainingModal = ({ setTrainingOpen }) => {
+const TrainingModal = ({ setTrainingOpen, trainingArray }) => {
+  const [training, setTrainig] = useState();
+
+  const submitTraining = (e) => {
+    e.preventDefault();
+    trainingArray.push(training);
+    setTrainingOpen(false);
+  };
   return (
     <div>
-      <div>
-        <input type="text" placeholder="Name" />
-      </div>
-      <button onClick={() => setTrainingOpen(false)}>Save</button>
+      <form action="" onSubmit={submitTraining} className="flex flex-col">
+        <input
+          type="text"
+          onChange={(e) => {
+            setTrainig(e.target.value);
+          }}
+        />
+        <button>Save</button>
+      </form>
     </div>
   );
 };

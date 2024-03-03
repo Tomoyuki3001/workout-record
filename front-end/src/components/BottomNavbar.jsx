@@ -26,7 +26,7 @@ const tabs = [
   },
 ];
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ user }) => {
   return (
     <nav
       className="px-4 fixed bottom-0 w-full py-4 bg-blue-400"
@@ -37,7 +37,9 @@ const BottomNavbar = () => {
           {tabs.map((tab, index) => (
             <NavItem key={`tab-${index}`}>
               <NavLink
-                to={tab.route}
+                to={{
+                  pathname: tab.route,
+                }}
                 className="nav-link"
                 activeClassName="active"
               >

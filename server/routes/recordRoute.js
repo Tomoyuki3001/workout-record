@@ -3,38 +3,24 @@ const router = express.Router();
 const RecordModel = require("../models/recordModel");
 const authMiddleware = require("../middleware/authMiddleware");
 
-router.get("/get-a-record", authMiddleware, async (req, res) => {
-  try {
-    const records = await RecordModel.findOne({ id: req.body.id });
-    // res.status(200).send({
-    //   message: "Logs fetched successfully",
-    //   success: true,
-    //   data: logs,
-    // });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      message: "Error applying doctor accounts",
-      success: false,
-      error,
-    });
-  }
-});
-
-router.post("/create-training-record", authMiddleware, async (req, res) => {
+router.post("/create-record", authMiddleware, async (req, res) => {
   console.log("value", req.body);
-  const dateRecord = await RecordModel.findOne({ id: req.body.id });
+  const recordFromTheDate = await RecordModel.findOne({ date: req.body.date });
+  if (recordFromTheDate) {
+    return res
+      .status(200)
+      .send({ message: "The record already exists", success: false });
+  }
   try {
-    const updatedLogs = await LogModel.findOneAndUpdate(
-      {
-        userId: userId,
-      },
-      { logs: newLogs },
-      { new: true }
-    );
-    res.json(updatedLogs);
+    const newRecord = new RecordModel(req.body);
+    await newRecord.save();
+    res
+      .status(200)
+      .send({ message: "Daily record created successfully", success: true });
   } catch (error) {
-    res.status(500).json({ error: "Could not update logs", details: error });
+    res
+      .status(500)
+      .json({ error: "Could not create the daily record", details: error });
   }
 });
 

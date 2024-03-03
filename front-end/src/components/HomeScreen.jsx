@@ -34,7 +34,7 @@ const HomeScreen = () => {
           </ul>
         </div>
       </div>
-      <BottomNavbar />
+      <BottomNavbar user={user} />
     </div>
   );
 };

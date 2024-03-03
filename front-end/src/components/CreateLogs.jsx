@@ -9,9 +9,9 @@ const CreateLogs = () => {
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
   const [trainingArray, setTrainingArray] = useState([
-    "Cardio",
-    "Bench Press",
-    "Lat Pulldown",
+    { name: "Cardio", set: [] },
+    { name: "Bench Press", set: [] },
+    { name: "Lat Pulldown", set: [] },
   ]);
 
   const fetchLogs = async () => {
@@ -31,6 +31,23 @@ const CreateLogs = () => {
       console.error("Error fetching logs:", error);
     }
   };
+
+  // const fetchRecord = async () => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const response = await axios.get(
+  //       "http://localhost:5000/api/record/get-record-by-date",
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log("record array", response.data.data[0]);
+  //   } catch (error) {
+  //     console.error("Error fetching logs:", error);
+  //   }
+  // };
 
   const createDaiyLog = (e) => {
     e.preventDefault();
@@ -61,14 +78,16 @@ const CreateLogs = () => {
     };
     axios
       .post(
-        "http://localhost:5000/api/record/create-record",
+        "http://localhost:5000/api/record/get-record-by-date",
         {
           date,
           userId,
         },
         { headers }
       )
-      .then(() => {})
+      .then((message) => {
+        console.log("message", message);
+      })
       .catch((error) => console.log("Error", error));
   };
 

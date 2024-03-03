@@ -61,17 +61,17 @@ router.post("/create-user-log", authMiddleware, async (req, res) => {
   }
 });
 
-router.post("/get-user-log-by-id", authMiddleware, async (req, res) => {
-  try {
-    const log = await LogModel.findOne({ id: req.body.userId });
-  } catch (error) {
-    res.status(500).send({
-      message: "Error getting user log",
-      success: false,
-      error,
-    });
-  }
-});
+// router.post("/get-user-log-by-id", authMiddleware, async (req, res) => {
+//   try {
+//     const log = await LogModel.findOne({ id: req.body.userId });
+//   } catch (error) {
+//     res.status(500).send({
+//       message: "Error getting user log",
+//       success: false,
+//       error,
+//     });
+//   }
+// });
 
 router.post("/delete-log-by-id", authMiddleware, async (req, res) => {
   const { userId, newLogs } = req.body;
@@ -89,21 +89,21 @@ router.post("/delete-log-by-id", authMiddleware, async (req, res) => {
   }
 });
 
-router.post("/create-training-record", authMiddleware, async (req, res) => {
-  console.log("value", req);
-  const dateRecord = await LogModel.findOne({ id: req.body.userId });
-  try {
-    const updatedLogs = await LogModel.findOneAndUpdate(
-      {
-        userId: userId,
-      },
-      { logs: newLogs },
-      { new: true }
-    );
-    res.json(updatedLogs);
-  } catch (error) {
-    res.status(500).json({ error: "Could not update logs", details: error });
-  }
-});
+// router.post("/create-training-record", authMiddleware, async (req, res) => {
+//   console.log("value", req);
+//   const dateRecord = await LogModel.findOne({ id: req.body.userId });
+//   try {
+//     const updatedLogs = await LogModel.findOneAndUpdate(
+//       {
+//         userId: userId,
+//       },
+//       { logs: newLogs },
+//       { new: true }
+//     );
+//     res.json(updatedLogs);
+//   } catch (error) {
+//     res.status(500).json({ error: "Could not update logs", details: error });
+//   }
+// });
 
 module.exports = router;

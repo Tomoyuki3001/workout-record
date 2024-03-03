@@ -22,7 +22,7 @@ const TrainingDetails = ({ trainingArray }) => {
           <div className="flex flex-col items-center">
             {trainingArray.map((training) => (
               <div className="flex">
-                <p>{training}</p>
+                <p>{training.name}</p>
                 <button onClick={() => setWeightOpen(true)}>Add reps</button>
               </div>
             ))}

@@ -43,9 +43,7 @@ router.post("/login", async (req, res) => {
         .status(200)
         .send({ message: "The password is wrong", success: false });
     } else {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "3h",
-      });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       res
         .status(200)
         .send({ message: "Successful", success: true, data: token });

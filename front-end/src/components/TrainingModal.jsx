@@ -5,7 +5,7 @@ const TrainingModal = ({ setTrainingOpen, trainingArray }) => {
 
   const submitTraining = (e) => {
     e.preventDefault();
-    trainingArray.push(training);
+    trainingArray.push({ name: training, set: [] });
     setTrainingOpen(false);
   };
   return (

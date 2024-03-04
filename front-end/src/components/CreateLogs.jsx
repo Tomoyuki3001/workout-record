@@ -18,36 +18,19 @@ const CreateLogs = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/api/log/get-all-logs",
+        "http://localhost:5000/api/log/get-all-records",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setUser(response.data.data[0]);
       setLogs(response.data.data[0].logs);
+      setUser(response.data.data[0]);
     } catch (error) {
       console.error("Error fetching logs:", error);
     }
   };
-
-  // const fetchRecord = async () => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     const response = await axios.get(
-  //       "http://localhost:5000/api/record/get-record-by-date",
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     console.log("record array", response.data.data[0]);
-  //   } catch (error) {
-  //     console.error("Error fetching logs:", error);
-  //   }
-  // };
 
   const createDaiyLog = (e) => {
     e.preventDefault();
@@ -60,7 +43,7 @@ const CreateLogs = () => {
     };
     axios
       .post(
-        "http://localhost:5000/api/log/create-user-log",
+        "http://localhost:5000/api/log/create-daily-log",
         { date, type, id },
         { headers }
       )
@@ -70,34 +53,9 @@ const CreateLogs = () => {
       .catch((error) => console.log("Error", error));
   };
 
-  const createTraining = (date, userId) => {
-    const token = localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-    axios
-      .post(
-        "http://localhost:5000/api/record/get-record-by-date",
-        {
-          date,
-          userId,
-        },
-        { headers }
-      )
-      .then((message) => {
-        console.log("message", message);
-      })
-      .catch((error) => console.log("Error", error));
-  };
-
-  // const logEdit = (id, date) => {
-  //   console.log(id, date);
-  // };
-
   const logDelete = async (id) => {
     const token = localStorage.getItem("token");
-    const updatedLogs = logs.filter((log) => log.id !== id);
+    const updatedLogs = logs.filter((log) => log.recordId !== id);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/log/delete-log-by-id",
@@ -163,9 +121,9 @@ const CreateLogs = () => {
               <details
                 className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
                 key={log.date}
-                onClick={() => {
-                  createTraining(log.date, log.userId);
-                }}
+                // onClick={() => {
+                //   createTraining(log.date, log.userId);
+                // }}
               >
                 <summary className="flex">
                   <div className="text-left">
@@ -177,23 +135,16 @@ const CreateLogs = () => {
                     <p>{log.type}</p>
                   </div>
                   <div>
-                    {/* <button
-                      onClick={() => {
-                        logEdit(log.id, log.date);
-                      }}
-                    >
-                      Add
-                    </button> */}
                     <button
                       onClick={() => {
-                        logDelete(log.id);
+                        logDelete(log.recordId);
                       }}
                     >
                       Delete
                     </button>
                   </div>
                 </summary>
-                <TrainingDetails trainingArray={trainingArray} user={user} />
+                <TrainingDetails trainingArray={trainingArray} />
               </details>
             ))}
           </div>

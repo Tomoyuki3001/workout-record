@@ -1,7 +1,6 @@
 require("dotenv").config();
 const userRoute = require("./routes/userRoute");
 const logRoute = require("./routes/logRoute");
-const recordRoute = require("./routes/recordRoute");
 const express = require("express");
 const cors = require("cors");
 
@@ -15,7 +14,6 @@ app.use(cors(corsOptions));
 
 app.use("/api/user", userRoute);
 app.use("/api/log", logRoute);
-app.use("/api/record", recordRoute);
 
 app.listen(5000, () => {
   console.log("Server is running");

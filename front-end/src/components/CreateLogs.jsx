@@ -67,6 +67,24 @@ const CreateLogs = () => {
     }
   };
 
+  const setWeightRep = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/log/update-weight-by-training",
+        { newArray: logs },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      fetchLogs();
+    } catch (error) {
+      console.error("Error updating logs:", error);
+    }
+  };
+
   const logDelete = async (id) => {
     const token = localStorage.getItem("token");
     const updatedLogs = logs.filter((log) => log.recordId !== id);
@@ -161,6 +179,7 @@ const CreateLogs = () => {
                 <TrainingDetails
                   trainingArray={trainingArray}
                   createTraining={createTraining}
+                  setWeightRep={setWeightRep}
                 />
               </details>
             ))}

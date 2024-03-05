@@ -22,7 +22,6 @@ router.get("/get-all-records", authMiddleware, async (req, res) => {
 });
 
 router.post("/create-daily-log", authMiddleware, async (req, res) => {
-  console.log("value", req.body);
   try {
     const logExists = await LogModel.findOne({ userId: req.body.userId });
     if (!logExists) {
@@ -72,6 +71,22 @@ router.post("/delete-log-by-id", authMiddleware, async (req, res) => {
         userId: userId,
       },
       { logs: newLogs },
+      { new: true }
+    );
+    res.json(updatedLogs);
+  } catch (error) {
+    res.status(500).json({ error: "Could not update logs", details: error });
+  }
+});
+
+router.post("/update-training-by-date", authMiddleware, async (req, res) => {
+  const { userId, newArray } = req.body;
+  try {
+    const updatedLogs = await LogModel.findOneAndUpdate(
+      {
+        userId: userId,
+      },
+      { logs: newArray },
       { new: true }
     );
     res.json(updatedLogs);

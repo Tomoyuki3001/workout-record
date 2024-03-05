@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-const TrainingModal = ({ setTrainingOpen, trainingArray }) => {
+const TrainingModal = ({ setTrainingOpen, trainingArray, createTraining }) => {
   const [training, setTrainig] = useState();
 
   const submitTraining = (e) => {
     e.preventDefault();
     trainingArray.push({ name: training, set: [] });
+    createTraining();
     setTrainingOpen(false);
   };
   return (
@@ -17,7 +18,13 @@ const TrainingModal = ({ setTrainingOpen, trainingArray }) => {
             setTrainig(e.target.value);
           }}
         />
-        <button>Save</button>
+        <button
+          onClick={() => {
+            console.log("save");
+          }}
+        >
+          Save
+        </button>
       </form>
     </div>
   );

@@ -2,32 +2,33 @@ import React, { useState } from "react";
 import WeightModal from "./WeightModal";
 import TrainingModal from "./TrainingModal";
 
-const TrainingDetails = ({ trainingArray }) => {
+const TrainingDetails = ({ trainingArray, createTraining }) => {
   const [trainingOpen, setTrainingOpen] = useState(false);
   const [weightOpen, setWeightOpen] = useState(false);
 
   return (
     <div>
-      <div className="flex">
+      <div>
         <button onClick={() => setTrainingOpen(true)}>Add Training</button>
       </div>
       {trainingOpen && (
         <TrainingModal
           setTrainingOpen={setTrainingOpen}
           trainingArray={trainingArray}
+          createTraining={createTraining}
         />
       )}
       <div>
         <div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col">
             {trainingArray.map((training) => (
-              <div className="flex">
+              <div className="flex justify-around">
                 <p>{training.name}</p>
                 <button onClick={() => setWeightOpen(true)}>Add reps</button>
               </div>
             ))}
+            {weightOpen && <WeightModal setWeightOpen={setWeightOpen} />}
           </div>
-          {weightOpen && <WeightModal setWeightOpen={setWeightOpen} />}
           <div className="flex">
             <div className="flex">
               <p>Weight</p>

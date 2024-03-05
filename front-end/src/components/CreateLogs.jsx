@@ -8,11 +8,7 @@ const CreateLogs = () => {
   const [type, setType] = useState("");
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
-  const [trainingArray, setTrainingArray] = useState([
-    { name: "Cardio", set: [] },
-    { name: "Bench Press", set: [] },
-    { name: "Lat Pulldown", set: [] },
-  ]);
+  const [trainingArray, setTrainingArray] = useState([]);
 
   const fetchLogs = async () => {
     try {
@@ -51,6 +47,24 @@ const CreateLogs = () => {
         fetchLogs();
       })
       .catch((error) => console.log("Error", error));
+  };
+
+  const createTraining = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/log/update-training-by-date",
+        { newArray: logs },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      fetchLogs();
+    } catch (error) {
+      console.error("Error updating logs:", error);
+    }
   };
 
   const logDelete = async (id) => {
@@ -121,11 +135,11 @@ const CreateLogs = () => {
               <details
                 className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
                 key={log.date}
-                // onClick={() => {
-                //   createTraining(log.date, log.userId);
-                // }}
+                onClick={() => {
+                  setTrainingArray(log.set);
+                }}
               >
-                <summary className="flex">
+                <summary className="flex justify-around">
                   <div className="text-left">
                     <p>Date</p>
                     <p>{log.date}</p>
@@ -144,7 +158,10 @@ const CreateLogs = () => {
                     </button>
                   </div>
                 </summary>
-                <TrainingDetails trainingArray={trainingArray} />
+                <TrainingDetails
+                  trainingArray={trainingArray}
+                  createTraining={createTraining}
+                />
               </details>
             ))}
           </div>

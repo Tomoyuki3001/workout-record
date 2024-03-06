@@ -35,31 +35,33 @@ const Login = () => {
     <div className="flex flex-col items-center text-center justify-center h-screen px-10">
       <form
         action=""
-        className="flex flex-col items-center text-center justify-center px-4 py-8 bg-gray-400 w-full"
+        className="flex flex-col items-center text-center justify-center py-8 px-6 w-full"
         onSubmit={handleSubmit}
       >
-        <div className="flex flex-col items-start mb-5">
-          <label>Email</label>
+        <div className="flex flex-col items-start mb-8 w-full">
+          <label className="text-xl mb-3">Email</label>
           <input
-            className="border"
+            className="input-log-signup"
             type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="flex flex-col items-start mb-5">
-          <label>Password</label>
+        <div className="flex flex-col items-start mb-8 w-full">
+          <label className="text-xl mb-3">Password</label>
           <input
-            className="border"
+            className="input-log-signup"
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="px-4 py-2 bg-blue-400 text-white mb-4">
+        <button className="px-6 py-3 text-xl font-bold bg-blue-600 mb-4 hover:bg-blue-300">
           Log in
         </button>
-        <Link to="/signup">Sign up</Link>
+        <Link className="border-b text-xl" to="/signup">
+          Sign up
+        </Link>
       </form>
     </div>
   );

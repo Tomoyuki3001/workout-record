@@ -17,7 +17,7 @@ const tabs = [
   {
     route: "/logs",
     icon: faPlus,
-    label: "CreateLogs",
+    label: "Edit Logs",
   },
   {
     route: "/profile",
@@ -26,10 +26,10 @@ const tabs = [
   },
 ];
 
-const BottomNavbar = ({ user }) => {
+const BottomNavbar = () => {
   return (
     <nav
-      className="px-4 fixed bottom-0 w-full py-4 bg-blue-400"
+      className="px-10 fixed bottom-0 w-full py-4 bg-gray-600"
       role="navigation"
     >
       <Nav className="w-100">

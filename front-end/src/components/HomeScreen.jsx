@@ -36,21 +36,24 @@ const HomeScreen = () => {
     fetchLogs();
   }, []);
   return (
-    <div className="h-screen pt-4">
+    <div className="h-screen pt-8">
       <div className="px-4">
-        <div className="flex flex-col justify-center items-center text-center">
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-bold">Workout Tracking</h1>
           <button
-            className="px-4 py-2 bg-blue-400 text-white mb-4"
+            className="px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300"
             onClick={logout}
           >
-            Log out
+            Sign out
           </button>
+        </div>
+        <div>
           <h2>Hello, {userName}</h2>
         </div>
-        <div className="pt-6 pb-24 px-4 flex flex-col items-center text-center overflow-y-scroll bg-blue-100 h-full">
+        <div className="pt-6 pb-24 px-6 flex flex-col items-center text-center overflow-y-scroll h-full">
           {logs.map((log) => (
             <details
-              className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
+              className="flex border my-2 px-4 py-2 bg-gray-700 w-full justify-around"
               key={log.date}
             >
               <summary className="flex justify-around">

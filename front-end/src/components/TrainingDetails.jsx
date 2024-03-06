@@ -10,7 +10,12 @@ const TrainingDetails = ({ trainingArray, createTraining, setWeightRep }) => {
   return (
     <div>
       <div>
-        <button onClick={() => setTrainingOpen(true)}>Add Training</button>
+        <button
+          className="mt-2 px-2 bg-blue-600 hover:bg-blue-300 rounded"
+          onClick={() => setTrainingOpen(true)}
+        >
+          Add Training
+        </button>
       </div>
       {trainingOpen && (
         <TrainingModal

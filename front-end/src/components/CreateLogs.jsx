@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import BottomNavbar from "./BottomNavbar";
 import axios from "axios";
 import TrainingDetails from "./TrainingDetails";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, fafaAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 const CreateLogs = () => {
   const [date, setDate] = useState("");
@@ -9,6 +11,7 @@ const CreateLogs = () => {
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
   const [trainingArray, setTrainingArray] = useState([]);
+  const [angle, setAngle] = useState(faAngleDown);
 
   const fetchLogs = async () => {
     try {
@@ -45,6 +48,7 @@ const CreateLogs = () => {
       )
       .then(() => {
         fetchLogs();
+        window.location.reload();
       })
       .catch((error) => console.log("Error", error));
   };
@@ -110,48 +114,60 @@ const CreateLogs = () => {
 
   return (
     <div>
-      <div className="h-screen">
+      <div className="h-4/5">
         <form
           action=""
           onSubmit={createDaiyLog}
-          className="flex flex-col items-center text-center justify-center px-4 py-2 bg-gray-400 w-full h-1/5"
+          className="flex flex-col items-center text-center justify-center fixed border-b-2 px-4 py-2 w-full h-1/5"
         >
-          <div className="flex flex-col items-start mb-5">
-            <label>Date</label>
-            <input
-              className="border"
-              type="date"
-              placeholder="Date"
-              onChange={(e) => {
-                setDate(e.target.value);
-              }}
-            />
+          <div className="flex">
+            <div className="flex flex-col items-start mb-5">
+              <label className="mb-2">Date</label>
+              <input
+                className="border bg-transparent w-11/12 h-6"
+                type="date"
+                onChange={(e) => {
+                  setDate(e.target.value);
+                }}
+              />
+            </div>
+            <div className="flex flex-col items-start mb-5">
+              <label className="mb-2">Categories</label>
+              <select
+                className="border bg-transparent"
+                name="selectedType"
+                onChange={(e) => {
+                  setType(e.target.value);
+                }}
+              >
+                <option disabled selected value>
+                  {" "}
+                  -- Select a type --{" "}
+                </option>
+                <option className="bg-[#1f2937]" value="Upper Body">
+                  Upper Body
+                </option>
+                <option className="bg-[#1f2937]" value="Leg workout">
+                  Leg Workout
+                </option>
+                <option className="bg-[#1f2937]" value="Cardio">
+                  Cardio
+                </option>
+                <option className="bg-[#1f2937]" value="Full Body">
+                  Full Body
+                </option>
+              </select>
+            </div>
           </div>
-          <div className="flex flex-col items-start mb-5">
-            <label>Categories</label>
-            <select
-              name="selectedType"
-              onChange={(e) => {
-                setType(e.target.value);
-              }}
-            >
-              <option disabled selected value>
-                {" "}
-                -- select a type --{" "}
-              </option>
-              <option value="upper">Upper Body</option>
-              <option value="legs">Leg Workout</option>
-              <option value="cardio">Cardio</option>
-              <option value="full">Full Body</option>
-            </select>
-          </div>
-          <button className="px-4 py-2 bg-blue-400 text-white mb-4">Add</button>
+          <button className="px-4 py-2 font-bold bg-blue-600 hover:bg-blue-300 rounded">
+            Add
+          </button>
         </form>
-        <div className="h-4/5 bg-green-200">
-          <div className="pt-6 pb-24 px-4 flex flex-col items-center text-center overflow-y-scroll bg-blue-100 h-full">
+        <div className="h-4/5">
+          <div className="pt-48 pb-24 px-8 flex flex-col items-center text-center h-full">
             {logs.map((log) => (
               <details
-                className="flex my-2 px-4 py-2 bg-red-300 w-3/4 justify-around"
+                className="flex my-3 px-2 py-3 w-full justify-around border bg-gray-700"
                 key={log.date}
                 onClick={() => {
                   setTrainingArray(log.set);
@@ -166,8 +182,10 @@ const CreateLogs = () => {
                     <p>Type</p>
                     <p>{log.type}</p>
                   </div>
-                  <div>
+                  <div className="flex flex-col items-end">
+                    <FontAwesomeIcon icon={angle} />
                     <button
+                      className="mt-2 px-2 bg-blue-600 hover:bg-blue-300 rounded"
                       onClick={() => {
                         logDelete(log.recordId);
                       }}

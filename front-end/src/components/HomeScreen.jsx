@@ -41,7 +41,7 @@ const HomeScreen = () => {
         <div className="flex justify-between">
           <h1 className="text-2xl font-bold">Workout Tracking</h1>
           <button
-            className="px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300"
+            className="px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
             onClick={logout}
           >
             Sign out
@@ -53,7 +53,7 @@ const HomeScreen = () => {
         <div className="pt-6 pb-24 px-6 flex flex-col items-center text-center overflow-y-scroll h-full">
           {logs.map((log) => (
             <details
-              className="flex border my-2 px-4 py-2 bg-gray-700 w-full justify-around"
+              className="flex border my-3 px-4 py-2 bg-gray-700 w-full justify-around"
               key={log.date}
             >
               <summary className="flex justify-around">

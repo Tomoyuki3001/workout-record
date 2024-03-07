@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const WeightModal = ({
   setWeightOpen,
@@ -8,20 +10,32 @@ const WeightModal = ({
 }) => {
   const [weight, setWeight] = useState("");
   const [rep, setRep] = useState("");
-  // console.log("training name", trainingName);
   const submitWeight = (e) => {
     e.preventDefault();
     let arrayWithName = trainingArray.find((obj) => obj.name === trainingName);
     arrayWithName.set.push({ weight: weight, rep: rep });
-    console.log("array of the name", arrayWithName);
-    console.log("training array", trainingArray);
     setWeightRep();
     setWeightOpen(false);
   };
   return (
-    <div>
-      <form action="" onSubmit={submitWeight} className="flex flex-col">
+    <div className="weight-modal">
+      <div className="flex flex-col items-end">
+        <button>
+          <FontAwesomeIcon
+            onClick={() => {
+              setWeightOpen(false);
+            }}
+            icon={faXmark}
+          />
+        </button>
+      </div>
+      <form
+        action=""
+        onSubmit={submitWeight}
+        className="flex flex-col items-center"
+      >
         <input
+          className="w-2/3 mb-4 text-black"
           type="text"
           placeholder="Weight"
           onChange={(e) => {
@@ -29,13 +43,16 @@ const WeightModal = ({
           }}
         />
         <input
+          className="w-2/3 text-black"
           type="text"
           placeholder="Rep"
           onChange={(e) => {
             setRep(e.target.value);
           }}
         />
-        <button>Save</button>
+        <button className=" w-1/4 mt-4 px-2 bg-blue-600 hover:bg-blue-300 rounded">
+          Save
+        </button>
       </form>
     </div>
   );

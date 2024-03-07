@@ -21,3 +21,19 @@ body {
   box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
   background-color: rgb(31, 41, 55, 0.7);
 }
+
+/* .weight-button {
+  position: absolute;
+} */
+
+.weight-modal {
+  max-width: 15rem;
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  background-color: rgb(31, 41, 55, 0.7);
+  position: relative;
+  top: 20;
+  left: 20;
+}

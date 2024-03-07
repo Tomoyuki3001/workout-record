@@ -7,6 +7,7 @@ const TrainingDetails = ({
   createTraining,
   setWeightRep,
   updateTraining,
+  trainingRecordId,
 }) => {
   const [open, setOpen] = useState(false);
   const [weightOpen, setWeightOpen] = useState(false);
@@ -31,6 +32,14 @@ const TrainingDetails = ({
             createTraining={createTraining}
           />
         )}
+        {weightOpen && (
+          <WeightModal
+            setWeightOpen={setWeightOpen}
+            trainingArray={trainingArray}
+            trainingName={trainingName}
+            setWeightRep={setWeightRep}
+          />
+        )}
       </div>
       <div>
         <div>
@@ -41,7 +50,7 @@ const TrainingDetails = ({
                   <p className="font-bold text-xl">・{training.name}</p>
                   <div>
                     <button
-                      className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded"
+                      className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded weight-button"
                       onClick={() => {
                         console.log("training array", training);
                         setTrainingName(training.name);
@@ -51,12 +60,12 @@ const TrainingDetails = ({
                       Add Reps
                     </button>
                     <button
-                      className="px-2 bg-orange-400 hover:bg-orange-600 rounded"
+                      className="px-2 bg-gray-500 hover:bg-gray-700 rounded"
                       onClick={() => {
                         trainingArray = trainingArray.filter(
                           (array) => array !== training
                         );
-                        updateTraining();
+                        updateTraining(trainingArray, trainingRecordId);
                       }}
                     >
                       Delete
@@ -91,14 +100,6 @@ const TrainingDetails = ({
                 </table>
               </div>
             ))}
-            {weightOpen && (
-              <WeightModal
-                setWeightOpen={setWeightOpen}
-                trainingArray={trainingArray}
-                trainingName={trainingName}
-                setWeightRep={setWeightRep}
-              />
-            )}
           </div>
         </div>
       </div>

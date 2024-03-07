@@ -29,7 +29,7 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
         className="flex flex-col items-center"
       >
         <input
-          className="w-2/3"
+          className="w-2/3 text-black"
           type="text"
           onChange={(e) => {
             setTrainig(e.target.value);

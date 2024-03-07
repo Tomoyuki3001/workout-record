@@ -11,6 +11,7 @@ const CreateLogs = () => {
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
   const [trainingArray, setTrainingArray] = useState([]);
+  const [trainingRecordId, setTrainigRecordId] = useState("");
 
   const fetchLogs = async () => {
     try {
@@ -33,7 +34,7 @@ const CreateLogs = () => {
   const createDaiyLog = (e) => {
     e.preventDefault();
     let randomNumber = Math.floor(1000000000 + Math.random() * 9000000000);
-    let id = randomNumber.toString().substring(0, 10);
+    let id = randomNumber.toString().substring(0, 12);
     const token = localStorage.getItem("token");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -70,8 +71,10 @@ const CreateLogs = () => {
     }
   };
 
-  const updateTraining = async () => {
+  const updateTraining = async (array, id) => {
     const token = localStorage.getItem("token");
+    let deletedArray = logs.find((log) => log.recordId === id);
+    deletedArray.set = array;
     try {
       const response = await axios.post(
         "http://localhost:5000/api/log/update-training-by-user",
@@ -135,7 +138,7 @@ const CreateLogs = () => {
         <form
           action=""
           onSubmit={createDaiyLog}
-          className="flex flex-col items-center text-center justify-center fixed border-b-2 px-4 py-2 w-full h-1/5"
+          className="flex flex-col items-center text-center justify-center fixed bg-[#1f2937] border-b-2 px-4 py-2 w-full h-1/5"
         >
           <div className="flex">
             <div className="flex flex-col items-start mb-5">
@@ -187,6 +190,7 @@ const CreateLogs = () => {
                 className="flex my-3 px-2 py-3 w-full justify-around border bg-gray-700"
                 key={log.date}
                 onClick={() => {
+                  setTrainigRecordId(log.recordId);
                   setTrainingArray(log.set);
                 }}
               >
@@ -216,6 +220,7 @@ const CreateLogs = () => {
                   createTraining={createTraining}
                   setWeightRep={setWeightRep}
                   updateTraining={updateTraining}
+                  trainingRecordId={trainingRecordId}
                 />
               </details>
             ))}

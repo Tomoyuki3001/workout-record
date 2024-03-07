@@ -3,7 +3,7 @@ import BottomNavbar from "./BottomNavbar";
 import axios from "axios";
 import TrainingDetails from "./TrainingDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, fafaAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const CreateLogs = () => {
   const [date, setDate] = useState("");
@@ -11,7 +11,6 @@ const CreateLogs = () => {
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState(null);
   const [trainingArray, setTrainingArray] = useState([]);
-  const [angle, setAngle] = useState(faAngleDown);
 
   const fetchLogs = async () => {
     try {
@@ -58,6 +57,24 @@ const CreateLogs = () => {
     try {
       const response = await axios.post(
         "http://localhost:5000/api/log/update-training-by-date",
+        { newArray: logs },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      fetchLogs();
+    } catch (error) {
+      console.error("Error updating logs:", error);
+    }
+  };
+
+  const updateTraining = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/log/update-training-by-user",
         { newArray: logs },
         {
           headers: {
@@ -183,9 +200,9 @@ const CreateLogs = () => {
                     <p>{log.type}</p>
                   </div>
                   <div className="flex flex-col items-end">
-                    <FontAwesomeIcon icon={angle} />
+                    <FontAwesomeIcon icon={faAngleDown} />
                     <button
-                      className="mt-2 px-2 bg-blue-600 hover:bg-blue-300 rounded"
+                      className="mt-2 px-2 bg-orange-500 hover:bg-orange-300 rounded"
                       onClick={() => {
                         logDelete(log.recordId);
                       }}
@@ -198,6 +215,7 @@ const CreateLogs = () => {
                   trainingArray={trainingArray}
                   createTraining={createTraining}
                   setWeightRep={setWeightRep}
+                  updateTraining={updateTraining}
                 />
               </details>
             ))}

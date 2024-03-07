@@ -111,4 +111,20 @@ router.post("/update-weight-by-training", authMiddleware, async (req, res) => {
   }
 });
 
+router.post("/update-training-by-user", authMiddleware, async (req, res) => {
+  const { userId, newArray } = req.body;
+  try {
+    const updatedLogs = await LogModel.findOneAndUpdate(
+      {
+        userId: userId,
+      },
+      { logs: newArray },
+      { new: true }
+    );
+    res.json(updatedLogs);
+  } catch (error) {
+    res.status(500).json({ error: "Could not update logs", details: error });
+  }
+});
+
 module.exports = router;

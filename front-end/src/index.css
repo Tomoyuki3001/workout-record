@@ -14,18 +14,10 @@ body {
 }
 
 .training-modal {
-  background: #ffffff;
-  border-radius: 0.5em;
-  box-shadow: 0 10px 20px rgba(black, 0.2);
-  left: 50%;
-  max-width: 90%;
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 30em;
-  text-align: left;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
+  max-width: 15rem;
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  background-color: rgb(31, 41, 55, 0.7);
 }

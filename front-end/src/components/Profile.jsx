@@ -4,23 +4,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
   const userName = user && user.name;
   const userEmail = user && user.email;
   const userWeight = user && user.weight;
-  const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedValue, setSelectedValue] = useState("kg");
+  const navigate = useNavigate();
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
   const editProfile = () => {
-    setOpen(true);
+    setEditOpen(true);
+  };
+
+  const deleteProfile = () => {
+    setDeleteOpen(true);
   };
 
   const updateUserProfile = async () => {
@@ -38,6 +45,27 @@ const Profile = () => {
         )
         .then(() => {
           window.location.reload();
+        });
+    } catch (error) {
+      console.error("Error updating logs:", error);
+    }
+  };
+  const deleteUserProfile = async () => {
+    const token = localStorage.getItem("token");
+    console.log("user id", user._id);
+    try {
+      const response = await axios
+        .post(
+          "http://localhost:5000/api/user/delete-user",
+          { id: user._id },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          navigate("/login");
         });
     } catch (error) {
       console.error("Error updating logs:", error);
@@ -68,19 +96,22 @@ const Profile = () => {
           >
             Edit
           </button>
-          <button className="px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded">
+          <button
+            className="px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+            onClick={deleteProfile}
+          >
             Delete
           </button>
         </div>
       </div>
-      {open && (
+      {editOpen && (
         <div className="profile-modal-container w-full flex flex-col items-center">
           <div className="flex flex-col items-center px-20 py-10 bg-gray-500">
             <div className="w-full mb-4 flex flex-col items-end">
               <button>
                 <FontAwesomeIcon
                   onClick={() => {
-                    setOpen(false);
+                    setEditOpen(false);
                   }}
                   icon={faXmark}
                 />
@@ -133,6 +164,33 @@ const Profile = () => {
             >
               Submit
             </button>
+          </div>
+        </div>
+      )}
+      {deleteOpen && (
+        <div className="profile-modal-container w-full flex flex-col items-center p-8">
+          <div className="flex flex-col items-center px-20 py-10 bg-gray-500">
+            <div>
+              <p>Do you want to delete your account?</p>
+            </div>
+            <div className="flex">
+              <button
+                className="mt-10 mr-4 px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+                onClick={() => {
+                  deleteUserProfile();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+                onClick={() => {
+                  setDeleteOpen(false);
+                }}
+              >
+                No
+              </button>
+            </div>
           </div>
         </div>
       )}

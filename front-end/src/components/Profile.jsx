@@ -51,8 +51,8 @@ const Profile = () => {
     }
   };
   const deleteUserProfile = async () => {
+    deleteUserRecord();
     const token = localStorage.getItem("token");
-    console.log("user id", user._id);
     try {
       const response = await axios
         .post(
@@ -67,6 +67,23 @@ const Profile = () => {
         .then(() => {
           navigate("/login");
         });
+    } catch (error) {
+      console.error("Error updating logs:", error);
+    }
+  };
+
+  const deleteUserRecord = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/log/delete-user-record",
+        { id: user._id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
       console.error("Error updating logs:", error);
     }
@@ -98,7 +115,9 @@ const Profile = () => {
           </button>
           <button
             className="px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
-            onClick={deleteProfile}
+            onClick={() => {
+              deleteProfile();
+            }}
           >
             Delete
           </button>

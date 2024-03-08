@@ -127,4 +127,15 @@ router.post("/update-training-by-user", authMiddleware, async (req, res) => {
   }
 });
 
+router.post("/delete-user-record", authMiddleware, async (req, res) => {
+  const id = req.body.id;
+  try {
+    const log = await LogModel.findOneAndDelete({ userId: id });
+    if (!log) return res.sendStatus(404);
+    return res.send(user);
+  } catch (e) {
+    return res.sendStatus(400);
+  }
+});
+
 module.exports = router;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Login from "./pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from "./pages/Signin";
@@ -6,7 +6,6 @@ import HomeScreen from "./components/HomeScreen";
 import CreateLogs from "./components/CreateLogs";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import LogEdit from "./components/LogEdit";
 
 const App = () => {
   return (
@@ -35,14 +34,6 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/log-edit"
-          element={
-            <ProtectedRoute>
-              <LogEdit />
             </ProtectedRoute>
           }
         />

@@ -22,7 +22,7 @@ const Login = () => {
         dispatch(setUser());
         toast.success(response.data.message);
         localStorage.setItem("token", response.data.data);
-        navigate("/");
+        navigate("/", { state: response.data.user });
       } else {
         toast.error(response.data.message);
       }

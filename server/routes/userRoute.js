@@ -44,9 +44,12 @@ router.post("/login", async (req, res) => {
         .send({ message: "The password is wrong", success: false });
     } else {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-      res
-        .status(200)
-        .send({ message: "Successful", success: true, data: token });
+      res.status(200).send({
+        message: "Successful",
+        success: true,
+        data: token,
+        user: user,
+      });
     }
   } catch (error) {
     res
@@ -96,6 +99,19 @@ router.post("/update-profile", authMiddleware, async (req, res) => {
       success: false,
       error,
     });
+  }
+});
+
+router.post("/update-user-profile", authMiddleware, async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ _id: req.body.id });
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.weight = req.body.weight;
+    await user.save();
+    res.status(200).json({ message: "Profile updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

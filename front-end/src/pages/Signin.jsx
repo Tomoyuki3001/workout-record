@@ -7,12 +7,18 @@ const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [weight, setWeight] = useState("kg");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/user/signup", { name, email, password })
+      .post("http://localhost:5000/api/user/signup", {
+        name,
+        email,
+        password,
+        weight,
+      })
       .then(() => {
         navigate("/login");
       })

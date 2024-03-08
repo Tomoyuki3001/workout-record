@@ -3,13 +3,15 @@ import BottomNavbar from "./BottomNavbar";
 import axios from "axios";
 import TrainingDetails from "./TrainingDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const CreateLogs = () => {
+  const { user } = useSelector((state) => state.user);
+  const userWeight = user && user.weight;
   const [date, setDate] = useState("");
   const [type, setType] = useState("");
   const [logs, setLogs] = useState([]);
-  const [user, setUser] = useState(null);
   const [trainingArray, setTrainingArray] = useState([]);
   const [trainingRecordId, setTrainigRecordId] = useState("");
 
@@ -25,7 +27,6 @@ const CreateLogs = () => {
         }
       );
       setLogs(response.data.data[0].logs);
-      setUser(response.data.data[0]);
     } catch (error) {
       console.error("Error fetching logs:", error);
     }
@@ -221,6 +222,7 @@ const CreateLogs = () => {
                   setWeightRep={setWeightRep}
                   updateTraining={updateTraining}
                   trainingRecordId={trainingRecordId}
+                  userWeight={userWeight}
                 />
               </details>
             ))}

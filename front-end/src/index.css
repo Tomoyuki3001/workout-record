@@ -22,10 +22,6 @@ body {
   background-color: rgb(31, 41, 55, 0.7);
 }
 
-/* .weight-button {
-  position: absolute;
-} */
-
 .weight-modal {
   max-width: 15rem;
   padding: 1rem;
@@ -36,4 +32,9 @@ body {
   position: relative;
   top: 20;
   left: 20;
+}
+
+.profile-modal-container {
+  position: fixed;
+  top: 25%;
 }

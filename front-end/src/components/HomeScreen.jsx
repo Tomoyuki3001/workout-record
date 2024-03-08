@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const HomeScreen = () => {
-  const { user } = useSelector((state) => state.user);
   const [logs, setLogs] = useState([]);
+  const { user } = useSelector((state) => state.user);
   const userName = user && user.name;
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const HomeScreen = () => {
   useEffect(() => {
     fetchLogs();
   }, []);
+
   return (
     <div className="h-screen pt-8">
       <div className="px-4">

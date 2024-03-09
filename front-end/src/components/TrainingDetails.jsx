@@ -17,7 +17,6 @@ const TrainingDetails = ({
   const [weightOpen, setWeightOpen] = useState(false);
   const [distanceOpen, setDistanceOpen] = useState(false);
   const [trainingName, setTrainingName] = useState("");
-  // const [cardioTrue, setCardioTrue] = useState(false);
 
   return (
     <div>
@@ -71,7 +70,7 @@ const TrainingDetails = ({
         <div>
           <div className="flex flex-col">
             {trainingArray.map((training) => (
-              <div className="mb-2 w-full">
+              <div className="px-2 mb-4 w-full">
                 <div className="text-start">
                   <p className="font-bold text-xl">・{training.name}</p>
                 </div>
@@ -79,7 +78,7 @@ const TrainingDetails = ({
                   {!training.cardio ? (
                     <div>
                       <button
-                        className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded weight-button"
+                        className="px-2 mr-2 bg-blue-500 hover:bg-blue-700 rounded weight-button"
                         onClick={() => {
                           setTrainingName(training.name);
                           setWeightOpen(true);
@@ -102,7 +101,7 @@ const TrainingDetails = ({
                   ) : (
                     <div>
                       <button
-                        className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded weight-button"
+                        className="px-2 mr-2 bg-blue-500 hover:bg-blue-700 rounded weight-button"
                         onClick={() => {
                           setTrainingName(training.name);
                           setDistanceOpen(true);

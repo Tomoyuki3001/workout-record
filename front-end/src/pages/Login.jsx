@@ -47,7 +47,7 @@ const Login = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col items-start mb-8 w-full">
-          <label className="text-xl mb-3">Email</label>
+          <label className="text-xl mb-3 font-bold">Email</label>
           <input
             className="input-log-signup"
             type="email"
@@ -56,7 +56,7 @@ const Login = () => {
           />
         </div>
         <div className="flex flex-col items-start mb-8 w-full">
-          <label className="text-xl mb-3">Password</label>
+          <label className="text-xl mb-3 font-bold">Password</label>
           <input
             className="input-log-signup"
             type="password"
@@ -65,7 +65,7 @@ const Login = () => {
           />
         </div>
         <button className="px-6 py-3 text-xl font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded">
-          Sign in
+          Log in
         </button>
         <Link className="border-b text-xl" to="/signup">
           Sign up

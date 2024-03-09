@@ -48,7 +48,7 @@ const Signin = () => {
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col items-start mb-8 w-full">
-          <label className="text-xl mb-3">Name</label>
+          <label className="text-xl mb-3 font-bold">Name</label>
           <input
             className="input-log-signup"
             type="name"
@@ -57,7 +57,7 @@ const Signin = () => {
           />
         </div>
         <div className="flex flex-col items-start mb-8 w-full">
-          <label className="text-xl mb-3">Email</label>
+          <label className="text-xl mb-3 font-bold">Email</label>
           <input
             className="input-log-signup"
             type="email"
@@ -66,7 +66,7 @@ const Signin = () => {
           />
         </div>
         <div className="flex flex-col items-start mb-8 w-full">
-          <label className="text-xl mb-3">Password</label>
+          <label className="text-xl mb-3 font-bold">Password</label>
           <input
             className="input-log-signup"
             type="password"
@@ -78,7 +78,7 @@ const Signin = () => {
           Sign up
         </button>
         <Link className="border-b text-xl" to="/login">
-          Sign in
+          Log in
         </Link>
       </form>
     </div>

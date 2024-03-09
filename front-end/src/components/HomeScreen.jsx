@@ -81,16 +81,26 @@ const HomeScreen = () => {
                   </div>
                   <table className="w-full mb-4">
                     <tr className="border-b-2">
-                      <th className="font-thin">Weight</th>
-                      <th className="font-thin">Reps</th>
+                      <th className="font-thin">
+                        {!record.cardio ? "Weight" : "Time"}
+                      </th>
+                      <th className="font-thin">
+                        {!record.cardio ? "Reps" : "Distance"}
+                      </th>
                       <th></th>
                     </tr>
                     {record.set.map((weight) => (
                       <tr>
                         <td>
-                          {weight.weight} {userWeight}
+                          {!record.cardio
+                            ? weight.weight + " " + userWeight
+                            : weight.time + " mins"}
                         </td>
-                        <td>{weight.rep}</td>
+                        <td>
+                          {!record.cardio
+                            ? weight.rep
+                            : weight.distance + " km"}
+                        </td>
                       </tr>
                     ))}
                   </table>

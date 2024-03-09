@@ -139,11 +139,11 @@ const CreateLogs = () => {
         <form
           action=""
           onSubmit={createDaiyLog}
-          className="flex flex-col items-center text-center justify-center fixed bg-[#1f2937] border-b-2 px-4 py-2 w-full h-1/5"
+          className="flex flex-col items-center text-center justify-center fixed bg-[#1f2937] border-b-4 px-4 py-2 w-full h-1/5"
         >
           <div className="flex">
             <div className="flex flex-col items-start mb-5">
-              <label className="mb-2">Date</label>
+              <label className="mb-2 font-bold">Date</label>
               <input
                 className="border bg-transparent w-11/12 h-6"
                 type="date"
@@ -154,7 +154,7 @@ const CreateLogs = () => {
               />
             </div>
             <div className="flex flex-col items-start mb-5">
-              <label className="mb-2">Categories</label>
+              <label className="mb-2 font-bold">Categories</label>
               <select
                 className="border bg-transparent"
                 name="selectedType"

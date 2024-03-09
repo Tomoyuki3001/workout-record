@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
+const CardioModal = ({ setCardioOpen, trainingArray, createTraining }) => {
   const [training, setTrainig] = useState();
 
   const submitTraining = (e) => {
     e.preventDefault();
-    trainingArray.push({ name: training, cardio: false, set: [] });
+    trainingArray.push({ name: training, cardio: true, set: [] });
     createTraining();
-    setOpen(false);
+    setCardioOpen(false);
   };
   return (
     <div className="training-modal">
@@ -17,7 +17,7 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
         <button>
           <FontAwesomeIcon
             onClick={() => {
-              setOpen(false);
+              setCardioOpen(false);
             }}
             icon={faXmark}
           />
@@ -46,4 +46,4 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
   );
 };
 
-export default TrainingModal;
+export default CardioModal;

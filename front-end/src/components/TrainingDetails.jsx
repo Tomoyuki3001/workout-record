@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import WeightModal from "./WeightModal";
 import TrainingModal from "./TrainingModal";
+import CardioModal from "./CardioModal";
+import DistanceModal from "./DistanceModal";
 
 const TrainingDetails = ({
   trainingArray,
@@ -11,8 +13,11 @@ const TrainingDetails = ({
   userWeight,
 }) => {
   const [open, setOpen] = useState(false);
+  const [cardioOpen, setCardioOpen] = useState(false);
   const [weightOpen, setWeightOpen] = useState(false);
+  const [distanceOpen, setDistanceOpen] = useState(false);
   const [trainingName, setTrainingName] = useState("");
+  // const [cardioTrue, setCardioTrue] = useState(false);
 
   return (
     <div>
@@ -23,12 +28,24 @@ const TrainingDetails = ({
         >
           Add Training
         </button>
+        <button
+          className=" ml-4 my-4 px-2 bg-green-600 hover:bg-green-300 rounded"
+          onClick={() => setCardioOpen(true)}
+        >
+          Add Cardio
+        </button>
       </div>
       <div className="flex flex-col items-center">
         {open && (
           <TrainingModal
-            open={open}
             setOpen={setOpen}
+            trainingArray={trainingArray}
+            createTraining={createTraining}
+          />
+        )}
+        {cardioOpen && (
+          <CardioModal
+            setCardioOpen={setCardioOpen}
             trainingArray={trainingArray}
             createTraining={createTraining}
           />
@@ -36,6 +53,14 @@ const TrainingDetails = ({
         {weightOpen && (
           <WeightModal
             setWeightOpen={setWeightOpen}
+            trainingArray={trainingArray}
+            trainingName={trainingName}
+            setWeightRep={setWeightRep}
+          />
+        )}
+        {distanceOpen && (
+          <DistanceModal
+            setDistanceOpen={setDistanceOpen}
             trainingArray={trainingArray}
             trainingName={trainingName}
             setWeightRep={setWeightRep}
@@ -51,41 +76,76 @@ const TrainingDetails = ({
                   <p className="font-bold text-xl">・{training.name}</p>
                 </div>
                 <div className="flex flex-col items-end mb-2">
-                  <div>
-                    <button
-                      className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded weight-button"
-                      onClick={() => {
-                        setTrainingName(training.name);
-                        setWeightOpen(true);
-                      }}
-                    >
-                      Add Reps
-                    </button>
-                    <button
-                      className="px-2 bg-gray-500 hover:bg-gray-700 rounded"
-                      onClick={() => {
-                        trainingArray = trainingArray.filter(
-                          (array) => array !== training
-                        );
-                        updateTraining(trainingArray, trainingRecordId);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  {!training.cardio ? (
+                    <div>
+                      <button
+                        className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded weight-button"
+                        onClick={() => {
+                          setTrainingName(training.name);
+                          setWeightOpen(true);
+                        }}
+                      >
+                        Add Reps
+                      </button>
+                      <button
+                        className="px-2 bg-gray-500 hover:bg-gray-700 rounded"
+                        onClick={() => {
+                          trainingArray = trainingArray.filter(
+                            (array) => array !== training
+                          );
+                          updateTraining(trainingArray, trainingRecordId);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        className="px-2 mr-2 bg-blue-400 hover:bg-blue-600 rounded weight-button"
+                        onClick={() => {
+                          setTrainingName(training.name);
+                          setDistanceOpen(true);
+                        }}
+                      >
+                        Add Time
+                      </button>
+                      <button
+                        className="px-2 bg-gray-500 hover:bg-gray-700 rounded"
+                        onClick={() => {
+                          trainingArray = trainingArray.filter(
+                            (array) => array !== training
+                          );
+                          updateTraining(trainingArray, trainingRecordId);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <table className="w-full mb-4">
                   <tr className="border-b-2">
-                    <th className="font-thin">Weight</th>
-                    <th className="font-thin">Reps</th>
+                    <th className="font-thin">
+                      {!training.cardio ? "Weight" : "Time"}
+                    </th>
+                    <th className="font-thin">
+                      {!training.cardio ? "Reps" : "Distance"}
+                    </th>
                     <th></th>
                   </tr>
                   {training.set.map((weight) => (
                     <tr>
                       <td>
-                        {weight.weight} {userWeight}
+                        {!training.cardio
+                          ? weight.weight + " " + userWeight
+                          : weight.time + " mins"}
                       </td>
-                      <td>{weight.rep}</td>
+                      <td>
+                        {!training.cardio
+                          ? weight.rep
+                          : weight.distance + " km"}
+                      </td>
                       <td>
                         <button
                           className="px-2 bg-gray-500 hover:bg-gray-700 rounded"

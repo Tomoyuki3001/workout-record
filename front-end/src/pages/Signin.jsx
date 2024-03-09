@@ -78,7 +78,7 @@ const Signin = () => {
           Sign up
         </button>
         <Link className="border-b text-xl" to="/login">
-          Log in
+          Sign in
         </Link>
       </form>
     </div>

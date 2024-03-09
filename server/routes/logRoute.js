@@ -49,7 +49,7 @@ router.post("/create-daily-log", authMiddleware, async (req, res) => {
       recordId: req.body.id,
       set: [],
     };
-    existedLogArray.push(newLogObj);
+    existedLogArray.unshift(newLogObj);
     await logExists.save();
     return res
       .status(200)

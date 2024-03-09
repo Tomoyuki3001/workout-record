@@ -40,9 +40,9 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div className="h-screen pt-8">
+    <div className="h-screen">
       <div>
-        <div className="fixed bg-[#1f2937] w-full">
+        <div className="fixed bg-[#1f2937] w-full h-1/6 pt-8">
           <div className="flex justify-around">
             <h1 className="text-2xl font-bold mr-2">Workout Tracking</h1>
             <button
@@ -56,7 +56,7 @@ const HomeScreen = () => {
             <h2>Hello, {userName}</h2>
           </div>
         </div>
-        <div className="pt-28 pb-24 px-8 flex flex-col items-center text-center">
+        <div className="pt-36 pb-24 px-8 flex flex-col items-center text-center">
           {logs.map((log) => (
             <details
               className="flex border my-3 px-1 py-2 bg-gray-700 w-full justify-around"
@@ -75,11 +75,11 @@ const HomeScreen = () => {
                 <FontAwesomeIcon icon={faAngleDown} />
               </summary>
               {log.set.map((record) => (
-                <div className="mt-4 px-2">
+                <div className="mt-6 px-4">
                   <div className="text-start mb-2">
                     <p className="font-bold text-xl">・{record.name}</p>
                   </div>
-                  <table className="w-full mb-4">
+                  <table className="w-full mb-4 px-2">
                     <tr className="border-b-2">
                       <th className="font-thin">
                         {!record.cardio ? "Weight" : "Time"}

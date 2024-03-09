@@ -5,6 +5,7 @@ import TrainingDetails from "./TrainingDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateLogs = () => {
   const { user } = useSelector((state) => state.user);
@@ -14,6 +15,9 @@ const CreateLogs = () => {
   const [logs, setLogs] = useState([]);
   const [trainingArray, setTrainingArray] = useState([]);
   const [trainingRecordId, setTrainigRecordId] = useState("");
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteRecordId, setDeleteRecordId] = useState("");
+  const navigate = useNavigate();
 
   const fetchLogs = async () => {
     try {
@@ -112,17 +116,18 @@ const CreateLogs = () => {
 
   const logDelete = async (id) => {
     const token = localStorage.getItem("token");
-    const updatedLogs = logs.filter((log) => log.recordId !== id);
+    let updatedlog = logs.filter((log) => log.recordId !== id);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/log/delete-log-by-id",
-        { newLogs: updatedLogs },
+        { newLogs: updatedlog },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+      setDeleteModal(false);
       fetchLogs();
     } catch (error) {
       console.error("Error updating logs:", error);
@@ -211,12 +216,40 @@ const CreateLogs = () => {
                     <button
                       className="mt-2 px-2 bg-orange-500 hover:bg-orange-300 rounded"
                       onClick={() => {
-                        logDelete(log.recordId);
+                        setDeleteModal(true);
+                        setDeleteRecordId(log.recordId);
                       }}
                     >
                       Delete
                     </button>
                   </div>
+                  {deleteModal && (
+                    <div className="profile-modal-container w-full flex flex-col items-center p-8">
+                      <div className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl">
+                        <div>
+                          <p>Do you want to delete this date?</p>
+                        </div>
+                        <div className="flex">
+                          <button
+                            className="mt-10 mr-4 px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+                            onClick={() => {
+                              logDelete(deleteRecordId);
+                            }}
+                          >
+                            Yes
+                          </button>
+                          <button
+                            className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+                            onClick={() => {
+                              setDeleteModal(false);
+                            }}
+                          >
+                            No
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </summary>
                 <TrainingDetails
                   trainingArray={trainingArray}

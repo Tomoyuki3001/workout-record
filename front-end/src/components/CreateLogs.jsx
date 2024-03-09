@@ -150,6 +150,7 @@ const CreateLogs = () => {
                 onChange={(e) => {
                   setDate(e.target.value);
                 }}
+                required
               />
             </div>
             <div className="flex flex-col items-start mb-5">
@@ -160,8 +161,9 @@ const CreateLogs = () => {
                 onChange={(e) => {
                   setType(e.target.value);
                 }}
+                required
               >
-                <option disabled selected value>
+                <option disabled selected value="">
                   {" "}
                   -- Select a type --{" "}
                 </option>

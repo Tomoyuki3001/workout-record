@@ -12,6 +12,22 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (name === "") {
+      alert("Please type your name");
+      return;
+    }
+    if (email === "") {
+      alert("Please type your email");
+      return;
+    }
+    if (password === "") {
+      alert("Please type your password");
+      return;
+    }
+    if (password.length < 4) {
+      alert("Password should be more than 4 characters");
+      return;
+    }
     axios
       .post("http://localhost:5000/api/user/signup", {
         name,

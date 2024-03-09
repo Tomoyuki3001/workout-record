@@ -31,21 +31,25 @@ const Profile = () => {
   };
 
   const updateUserProfile = async () => {
+    if (name === "") {
+      alert("Please type a name");
+      return;
+    }
+    if (email === "") {
+      alert("Please type an email");
+      return;
+    }
     const token = localStorage.getItem("token");
     try {
-      const response = await axios
-        .post(
-          "http://localhost:5000/api/user/update-user-profile",
-          { name: name, email: email, weight: selectedValue, id: user._id },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then(() => {
-          window.location.reload();
-        });
+      const response = await axios.post(
+        "http://localhost:5000/api/user/update-user-profile",
+        { name: name, email: email, weight: selectedValue, id: user._id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (error) {
       console.error("Error updating logs:", error);
     }
@@ -125,7 +129,10 @@ const Profile = () => {
       </div>
       {editOpen && (
         <div className="profile-modal-container w-full flex flex-col items-center">
-          <div className="flex flex-col items-center px-20 py-10 bg-gray-500">
+          <form
+            className="flex flex-col items-center px-20 py-10 bg-gray-500"
+            onSubmit={updateUserProfile}
+          >
             <div className="w-full mb-4 flex flex-col items-end">
               <button>
                 <FontAwesomeIcon
@@ -136,18 +143,18 @@ const Profile = () => {
                 />
               </button>
             </div>
-            <label>Name</label>
+            <label className="mb-2">Name</label>
             <input
-              className="text-black"
+              className="text-black mb-4"
               type="text"
               onChange={(e) => {
                 setName(e.target.value);
               }}
             />
-            <label>Email</label>
+            <label className="mb-2">Email</label>
             <input
-              className="text-black"
-              type="text"
+              className="text-black mb-4"
+              type="email"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -155,7 +162,7 @@ const Profile = () => {
             <label>Weight</label>
             <div className="flex">
               <div className="mr-4">
-                <label for="huey">kg</label>
+                <label className="text-xl mr-2">kg</label>
                 <input
                   type="radio"
                   id="kg"
@@ -165,7 +172,7 @@ const Profile = () => {
                 />
               </div>
               <div>
-                <label for="huey">lbs</label>
+                <label className="text-xl mr-2">lbs</label>
                 <input
                   type="radio"
                   id="lbs"
@@ -175,15 +182,10 @@ const Profile = () => {
                 />
               </div>
             </div>
-            <button
-              className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
-              onClick={() => {
-                updateUserProfile();
-              }}
-            >
+            <button className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded">
               Submit
             </button>
-          </div>
+          </form>
         </div>
       )}
       {deleteOpen && (

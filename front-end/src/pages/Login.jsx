@@ -13,6 +13,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (email === "") {
+      alert("Please type your email");
+      return;
+    }
+    if (password === "") {
+      alert("Please type your password");
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:5000/api/user/login",

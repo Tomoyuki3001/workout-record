@@ -81,27 +81,6 @@ router.post("/get-user-info-by-id", authMiddleware, async (req, res) => {
   }
 });
 
-router.post("/update-profile", authMiddleware, async (req, res) => {
-  try {
-    const doctor = await UserModel.findOneAndUpdate(
-      { userId: req.body.userId },
-      req.body
-    );
-
-    res.status(200).send({
-      success: true,
-      message: "The doctor plofile updated successfully",
-      data: doctor,
-    });
-  } catch (error) {
-    res.status(500).send({
-      message: "Error getting the doctor information",
-      success: false,
-      error,
-    });
-  }
-});
-
 router.post("/update-user-profile", authMiddleware, async (req, res) => {
   try {
     const user = await UserModel.findOne({ _id: req.body.id });

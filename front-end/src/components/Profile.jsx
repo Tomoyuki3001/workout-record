@@ -135,7 +135,7 @@ const Profile = () => {
       </div>
       {editOpen && (
         <div className="profile-modal-container w-full flex flex-col items-center">
-          <form
+          {/* <form
             action=""
             className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl"
             onSubmit={updateUserProfile}
@@ -192,7 +192,66 @@ const Profile = () => {
             <button className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded">
               Submit
             </button>
-          </form>
+          </form> */}
+          <div className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl">
+            <div className="w-full mb-4 flex flex-col items-end">
+              <button>
+                <FontAwesomeIcon
+                  onClick={() => {
+                    setEditOpen(false);
+                  }}
+                  icon={faXmark}
+                />
+              </button>
+            </div>
+            <label className="mb-2 font-bold">Name</label>
+            <input
+              className="text-black mb-4"
+              type="text"
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <label className="mb-2 font-bold">Email</label>
+            <input
+              className="text-black mb-4"
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <label className="font-bold">Weight</label>
+            <div className="flex">
+              <div className="mr-4">
+                <label className="text-xl mr-2">kg</label>
+                <input
+                  type="radio"
+                  id="kg"
+                  name="weight"
+                  value="kg"
+                  onChange={handleRadioChange}
+                />
+              </div>
+              <div>
+                <label className="text-xl mr-2">lbs</label>
+                <input
+                  type="radio"
+                  id="lbs"
+                  name="weight"
+                  value="lbs"
+                  onChange={handleRadioChange}
+                />
+              </div>
+            </div>
+            <button
+              className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+              onClick={() => {
+                updateUserProfile();
+              }}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       )}
       {deleteOpen && (

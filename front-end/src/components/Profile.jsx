@@ -94,7 +94,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="pt-8 pb-4">
+    <div className="pt-4 pb-4">
       <div className="flex flex-col justify-center items-center text-center">
         <h1 className="text-2xl font-bold">Profile</h1>
         <div className="flex justify-center my-10">

@@ -61,7 +61,7 @@ const HomeScreen = () => {
               key={log.date}
               onClick={() => {}}
             >
-              <summary className="flex justify-around">
+              <summary className="flex justify-between">
                 <div className="text-left">
                   <p>Date</p>
                   <p>{log.date}</p>

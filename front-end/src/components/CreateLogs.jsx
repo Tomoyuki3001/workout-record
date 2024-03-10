@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import BottomNavbar from "./BottomNavbar";
 import axios from "axios";
 import TrainingDetails from "./TrainingDetails";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const CreateLogs = () => {
   const { user } = useSelector((state) => state.user);
@@ -17,7 +14,6 @@ const CreateLogs = () => {
   const [trainingRecordId, setTrainigRecordId] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteRecordId, setDeleteRecordId] = useState("");
-  const navigate = useNavigate();
 
   const fetchLogs = async () => {
     try {
@@ -147,11 +143,13 @@ const CreateLogs = () => {
           className="flex flex-col items-center text-center justify-center fixed bg-[#1f2937] border-b-4 px-4 py-2 w-full h-1/5"
         >
           <div className="flex">
-            <div className="flex flex-col items-start mb-5">
+            <div className="flex flex-col items-start mb-5 mr-2">
               <label className="mb-2 font-bold">Date</label>
               <input
                 className="border bg-transparent w-11/12 h-6"
-                type="date"
+                type="text"
+                onfocus="(this.type='date')"
+                placeholder="MM/DD/YYYY"
                 onChange={(e) => {
                   setDate(e.target.value);
                 }}
@@ -212,7 +210,6 @@ const CreateLogs = () => {
                     <p>{log.type}</p>
                   </div>
                   <div className="flex flex-col items-end">
-                    <FontAwesomeIcon icon={faAngleDown} />
                     <button
                       className="mt-2 px-2 bg-orange-500 hover:bg-orange-300 rounded"
                       onClick={() => {

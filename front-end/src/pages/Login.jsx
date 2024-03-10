@@ -23,7 +23,7 @@ const Login = () => {
     }
     try {
       const response = await axios.post(
-        "https://workout-record-server.vercel.app/api/user/login",
+        "https://workout-tracking-rho.vercel.app/api/user/login",
         { email, password }
       );
       if (response.data.success) {
@@ -64,10 +64,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="px-6 py-3 text-xl font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded">
+        <button className="mt-6 px-6 py-3 text-xl font-bold bg-blue-600 mb-6 hover:bg-blue-300 rounded">
           Log in
         </button>
-        <Link className="border-b text-xl" to="/signup">
+        <Link className="border-b text-base" to="/signup">
           Sign up
         </Link>
       </form>

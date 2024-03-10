@@ -3,8 +3,6 @@ import BottomNavbar from "./BottomNavbar";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const HomeScreen = () => {
   const [logs, setLogs] = useState([]);
@@ -72,7 +70,6 @@ const HomeScreen = () => {
                   <p>Type</p>
                   <p>{log.type}</p>
                 </div>
-                <FontAwesomeIcon icon={faAngleDown} />
               </summary>
               {log.set.map((record) => (
                 <div className="mt-6 px-4">

@@ -38,7 +38,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen pt-4">
       <div>
         <div className="fixed bg-[#1f2937] w-full h-1/6 pt-8">
           <div className="flex justify-around">

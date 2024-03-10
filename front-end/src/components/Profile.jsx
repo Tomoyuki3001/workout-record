@@ -33,13 +33,14 @@ const Profile = () => {
   const updateUserProfile = async () => {
     if (name === "") {
       alert("Please type a name");
-      return;
+      navigate("/profile");
     }
     if (email === "") {
       alert("Please type an email");
-      return;
+      navigate("/profile");
     }
     const token = localStorage.getItem("token");
+    console.log(name, email, selectedValue, user._id);
     try {
       const response = await axios
         .post(
@@ -52,7 +53,7 @@ const Profile = () => {
           }
         )
         .then(() => {
-          navigate("/login");
+          navigate("/profile");
         });
     } catch (error) {
       console.error("Error updating logs:", error);

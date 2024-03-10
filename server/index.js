@@ -16,9 +16,9 @@ app.use(cors(corsOptions));
 app.use("/api/user", userRoute);
 app.use("/api/log", logRoute);
 
-app.get("/", (req, res) => {
-  res.json("Hello server!");
-});
+// app.get("/", (req, res) => {
+//   res.json("Hello server!");
+// });
 
 app.listen(5000, () => {
   console.log("Server is running");

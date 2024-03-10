@@ -41,15 +41,19 @@ const Profile = () => {
     }
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.post(
-        "https://workout-server-murex.vercel.app/api/user/update-user-profile",
-        { name: name, email: email, weight: selectedValue, id: user._id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios
+        .post(
+          "https://workout-server-murex.vercel.app/api/user/update-user-profile",
+          { name: name, email: email, weight: selectedValue, id: user._id },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(() => {
+          navigate("/login");
+        });
     } catch (error) {
       console.error("Error updating logs:", error);
     }

@@ -29,7 +29,7 @@ const Signin = () => {
       return;
     }
     axios
-      .post("http://localhost:5000/api/user/signup", {
+      .post("https://workout-record-server.vercel.app/api/user/signup", {
         name,
         email,
         password,

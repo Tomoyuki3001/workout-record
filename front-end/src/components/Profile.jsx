@@ -42,7 +42,7 @@ const Profile = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/update-user-profile",
+        "https://workout-record-server.vercel.app/api/user/update-user-profile",
         { name: name, email: email, weight: selectedValue, id: user._id },
         {
           headers: {
@@ -60,7 +60,7 @@ const Profile = () => {
     try {
       const response = await axios
         .post(
-          "http://localhost:5000/api/user/delete-user",
+          "https://workout-record-server.vercel.app/api/user/delete-user",
           { id: user._id },
           {
             headers: {
@@ -80,7 +80,7 @@ const Profile = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/delete-user-record",
+        "https://workout-record-server.vercel.app/api/log/delete-user-record",
         { id: user._id },
         {
           headers: {

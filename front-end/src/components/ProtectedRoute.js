@@ -12,7 +12,7 @@ const ProtectedRoute = (props) => {
   const getUser = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/get-user-info-by-id",
+        "https://workout-record-server.vercel.app/api/user/get-user-info-by-id",
         { token: localStorage.getItem("token") },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

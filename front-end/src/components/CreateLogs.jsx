@@ -23,7 +23,7 @@ const CreateLogs = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/api/log/get-all-records",
+        "https://workout-record-server.vercel.app/api/log/get-all-records",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const CreateLogs = () => {
     };
     axios
       .post(
-        "http://localhost:5000/api/log/create-daily-log",
+        "https://workout-record-server.vercel.app/api/log/create-daily-log",
         { date, type, id },
         { headers }
       )
@@ -62,7 +62,7 @@ const CreateLogs = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/update-training-by-date",
+        "https://workout-record-server.vercel.app/api/log/update-training-by-date",
         { newArray: logs },
         {
           headers: {
@@ -82,7 +82,7 @@ const CreateLogs = () => {
     deletedArray.set = array;
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/update-training-by-user",
+        "https://workout-record-server.vercel.app/api/log/update-training-by-user",
         { newArray: logs },
         {
           headers: {
@@ -100,7 +100,7 @@ const CreateLogs = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/update-weight-by-training",
+        "https://workout-record-server.vercel.app/api/log/update-weight-by-training",
         { newArray: logs },
         {
           headers: {
@@ -119,7 +119,7 @@ const CreateLogs = () => {
     let updatedlog = logs.filter((log) => log.recordId !== id);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/delete-log-by-id",
+        "https://workout-record-server.vercel.app/api/log/delete-log-by-id",
         { newLogs: updatedlog },
         {
           headers: {

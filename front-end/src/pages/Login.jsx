@@ -23,7 +23,7 @@ const Login = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/login",
+        "https://workout-record-server.vercel.app/api/user/login",
         { email, password }
       );
       if (response.data.success) {

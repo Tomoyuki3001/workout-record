@@ -148,7 +148,9 @@ const CreateLogs = () => {
               <input
                 className="border bg-transparent w-11/12 h-6"
                 type="text"
-                onfocus={(this.type = "date")}
+                onFocus={() => {
+                  this.type = "date";
+                }}
                 placeholder="MM/DD/YYYY"
                 onChange={(e) => {
                   setDate(e.target.value);

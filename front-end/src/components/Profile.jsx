@@ -15,7 +15,7 @@ const Profile = () => {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [selectedValue, setSelectedValue] = useState("kg");
+  const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
 
   const handleRadioChange = (event) => {
@@ -136,6 +136,7 @@ const Profile = () => {
       {editOpen && (
         <div className="profile-modal-container w-full flex flex-col items-center">
           <form
+            action=""
             className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl"
             onSubmit={updateUserProfile}
           >

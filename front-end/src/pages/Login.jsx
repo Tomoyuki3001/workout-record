@@ -46,7 +46,7 @@ const Login = () => {
         className="flex flex-col items-center text-center justify-center py-8 px-6 w-full"
         onSubmit={handleSubmit}
       >
-        <p>Demo: test@gmail.com/PW: 1234</p>
+        <p className="mb-6">Demo: test@gmail.com/PW: 1234</p>
         <div className="flex flex-col items-start mb-8 w-full">
           <label className="text-xl mb-3 font-bold">Email</label>
           <input

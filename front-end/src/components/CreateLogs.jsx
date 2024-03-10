@@ -188,7 +188,7 @@ const CreateLogs = () => {
           </button>
         </form>
         <div className="h-4/5">
-          <div className="pt-48 pb-24 px-8 flex flex-col items-center text-center h-full">
+          <div className="pt-48 pb-24 px-8 flex flex-col items-center text-center h-full md:px-96">
             {logs.map((log) => (
               <details
                 className="flex my-3 px-2 py-3 w-full justify-around border bg-gray-700"

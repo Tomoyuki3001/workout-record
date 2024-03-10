@@ -54,7 +54,7 @@ const HomeScreen = () => {
             <h2>Hello, {userName}</h2>
           </div>
         </div>
-        <div className="pt-36 pb-24 px-8 flex flex-col items-center text-center">
+        <div className="pt-36 pb-24 px-8 flex flex-col items-center text-center md:px-96">
           {logs.map((log) => (
             <details
               className="flex border my-3 px-1 py-2 bg-gray-700 w-full justify-around"

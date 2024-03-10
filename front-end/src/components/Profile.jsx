@@ -113,7 +113,7 @@ const Profile = () => {
         <h1 className="text-2xl font-bold">Profile</h1>
         <div className="flex justify-center my-10">
           <img
-            className="w-2/6 rounded-full"
+            className="md:w-1/5 w-2/6 rounded-full"
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
             alt="Profile"
           />

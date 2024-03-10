@@ -29,7 +29,7 @@ const tabs = [
 const BottomNavbar = () => {
   return (
     <nav
-      className="px-10 fixed bottom-0 w-full py-5 bg-gray-600"
+      className="px-10 fixed bottom-0 w-full py-5 bg-gray-600 md:px-48"
       role="navigation"
     >
       <Nav className="w-100">

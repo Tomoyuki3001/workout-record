@@ -7,6 +7,10 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
 
   const submitTraining = (e) => {
     e.preventDefault();
+    if (training === "") {
+      alert("Please enter the training");
+      return;
+    }
     trainingArray.push({ name: training, cardio: false, set: [] });
     createTraining();
     setOpen(false);

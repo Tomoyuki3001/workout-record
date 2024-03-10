@@ -12,6 +12,10 @@ const DistanceModal = ({
   const [distance, setDistance] = useState("");
   const submitWeight = (e) => {
     e.preventDefault();
+    if (time === "" && distance === "") {
+      alert("Please enter the log");
+      return;
+    }
     let arrayWithName = trainingArray.find((obj) => obj.name === trainingName);
     arrayWithName.set.push({ time: time, distance: distance });
     setWeightRep();

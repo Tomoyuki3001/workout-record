@@ -12,6 +12,14 @@ const WeightModal = ({
   const [rep, setRep] = useState("");
   const submitWeight = (e) => {
     e.preventDefault();
+    if (weight === "") {
+      alert("Please enter the weight");
+      return;
+    }
+    if (rep === "") {
+      alert("Please enter the reps");
+      return;
+    }
     let arrayWithName = trainingArray.find((obj) => obj.name === trainingName);
     arrayWithName.set.push({ weight: weight, rep: rep });
     setWeightRep();

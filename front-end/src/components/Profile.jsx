@@ -34,13 +34,14 @@ const Profile = () => {
     if (name === "") {
       alert("Please type a name");
       navigate("/profile");
+      return;
     }
     if (email === "") {
       alert("Please type an email");
       navigate("/profile");
+      return;
     }
     const token = localStorage.getItem("token");
-    console.log(name, email, selectedValue, user._id);
     try {
       const response = await axios
         .post(
@@ -53,7 +54,7 @@ const Profile = () => {
           }
         )
         .then(() => {
-          navigate("/profile");
+          window.location.reload();
         });
     } catch (error) {
       console.error("Error updating logs:", error);

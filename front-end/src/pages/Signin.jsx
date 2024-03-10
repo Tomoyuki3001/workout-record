@@ -29,7 +29,7 @@ const Signin = () => {
       return;
     }
     axios
-      .post("https://workout-record-server.vercel.app/api/user/signup", {
+      .post("https://workout-server-murex.vercel.app/api/user/signup", {
         name,
         email,
         password,

@@ -15,7 +15,7 @@ const HomeScreen = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "https://workout-record-server.vercel.app/api/log/get-all-records",
+        "https://workout-server-murex.vercel.app/api/log/get-all-records",
         {
           headers: {
             Authorization: `Bearer ${token}`,

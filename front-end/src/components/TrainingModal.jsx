@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
-  const [training, setTrainig] = useState();
+  const [training, setTrainig] = useState("");
 
   const submitTraining = (e) => {
     e.preventDefault();

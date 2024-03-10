@@ -40,7 +40,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center text-center justify-center h-screen px-10">
+    <div className="flex flex-col items-center text-center justify-center h-screen px-10 md:px-[30%]">
       <form
         action=""
         className="flex flex-col items-center text-center justify-center py-8 px-6 w-full"

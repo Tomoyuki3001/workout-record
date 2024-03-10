@@ -41,7 +41,7 @@ const Signin = () => {
       .catch((error) => console.log("Error", error));
   };
   return (
-    <div className="flex flex-col items-center text-center justify-center h-screen px-10">
+    <div className="flex flex-col items-center text-center justify-center h-screen px-10 md:px-[30%]">
       <form
         action=""
         className="flex flex-col items-center text-center justify-center px-4 py-8 w-full"

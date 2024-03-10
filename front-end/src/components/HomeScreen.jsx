@@ -50,7 +50,7 @@ const HomeScreen = () => {
               Sign out
             </button>
           </div>
-          <div className="pl-8">
+          <div className="pl-8 md:pl-20">
             <h2>Hello, {userName}</h2>
           </div>
         </div>

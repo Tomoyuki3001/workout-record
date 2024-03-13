@@ -140,7 +140,7 @@ const CreateLogs = () => {
         <form
           action=""
           onSubmit={createDaiyLog}
-          className="flex flex-col items-center text-center justify-center fixed bg-[#1f2937] border-b-4 px-4 py-2 w-full h-1/5"
+          className="z-20 flex flex-col items-center text-center justify-center fixed bg-[#1f2937] border-b-4 px-4 py-2 w-full h-1/5"
         >
           <div className="flex">
             <div className="flex flex-col items-start mb-5 mr-2">

@@ -38,9 +38,9 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div className="h-screen pt-4">
+    <div className="h-screen">
       <div>
-        <div className="fixed bg-[#1f2937] w-full h-1/6 pt-8">
+        <div className="fixed bg-[#1f2937] w-full h-1/6 pt-12">
           <div className="flex justify-around">
             <h1 className="text-2xl font-bold mr-2">Workout Tracking</h1>
             <button

@@ -1,58 +1,40 @@
 import React from "react";
-import { Nav, NavItem } from "reactstrap";
+import { Nav } from "reactstrap";
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faHome,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
-
-const tabs = [
-  {
-    route: "/",
-    icon: faHome,
-    label: "Home",
-  },
-  {
-    route: "/logs",
-    icon: faPlus,
-    label: "Edit Logs",
-  },
-  {
-    route: "/profile",
-    icon: faUserCircle,
-    label: "Profile",
-  },
-];
+import { AiOutlineHome } from "react-icons/ai";
+import { FaPlus } from "react-icons/fa6";
 
 const BottomNavbar = () => {
+  const tabs = [
+    {
+      route: "/",
+      label: "Home",
+      icon: <AiOutlineHome size={40} />,
+    },
+    {
+      route: "/logs",
+      label: "Edit",
+      icon: <FaPlus size={40} />,
+    },
+  ];
+
   return (
-    <nav
-      className="px-10 fixed bottom-0 w-full py-5 bg-gray-600 md:px-48"
-      role="navigation"
-    >
-      <Nav className="w-100">
-        <div className="w-100 flex justify-between">
-          {tabs.map((tab, index) => (
-            <NavItem key={`tab-${index}`}>
-              <NavLink
-                to={{
-                  pathname: tab.route,
-                }}
-                className="nav-link"
-                activeClassName="active"
-              >
-                <div className="flex flex-col items-center">
-                  <FontAwesomeIcon size="lg" icon={tab.icon} />
-                  <div>{tab.label}</div>
-                </div>
-              </NavLink>
-            </NavItem>
-          ))}
-        </div>
-      </Nav>
-    </nav>
+    <Nav className="w-full px-10 fixed bottom-0 pb-7 pt-2 bg-gray-600 md:px-48">
+      <div className="w-full flex justify-around">
+        {tabs.map((tab) => (
+          <NavLink
+            to={{
+              pathname: tab.route,
+            }}
+            className="nav-link text-white"
+          >
+            <div className="flex flex-col items-center">
+              {tab.icon} {tab.label}
+            </div>
+          </NavLink>
+        ))}
+      </div>
+    </Nav>
   );
 };
 

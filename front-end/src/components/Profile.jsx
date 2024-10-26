@@ -5,6 +5,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -17,6 +19,7 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
+  const url = "http://localhost:5000";
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
@@ -53,7 +56,7 @@ const Profile = () => {
     try {
       const response = await axios
         .post(
-          "https://workout-server-murex.vercel.app/api/user/update-user-profile",
+          `${url}/api/user/update-user-profile`,
           { name: name, email: email, weight: selectedValue, id: user._id },
           {
             headers: {
@@ -74,7 +77,7 @@ const Profile = () => {
     try {
       const response = await axios
         .post(
-          "https://workout-server-murex.vercel.app/api/user/delete-user",
+          `${url}/api/user/delete-user`,
           { id: user._id },
           {
             headers: {
@@ -94,7 +97,7 @@ const Profile = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "https://workout-server-murex.vercel.app/api/log/delete-user-record",
+        `${url}/api/log/delete-user-record`,
         { id: user._id },
         {
           headers: {
@@ -107,38 +110,58 @@ const Profile = () => {
     }
   };
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
-    <div className="pt-4 pb-4">
-      <div className="flex flex-col justify-center items-center text-center">
-        <h1 className="text-2xl font-bold">Profile</h1>
-        <div className="flex justify-center my-10">
+    <div className="pt-10">
+      <div className="flex flex-col">
+        <div className="flex items-center justify-between px-4">
+          <div className="flex">
+            <NavLink to="/" className="mx-2">
+              <FaArrowLeftLong size={30} />
+            </NavLink>
+            <h1 className="text-2xl font-bold">Profile</h1>
+          </div>
+          <button
+            className="px-4 py-2 text-md font-bold bg-blue-600 hover:bg-blue-300 rounded"
+            onClick={logout}
+          >
+            Sign out
+          </button>
+        </div>
+        <div className="flex flex-col items-center mt-20 mb-10">
           <img
             className="md:w-1/5 w-2/6 rounded-full"
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
             alt="Profile"
           />
         </div>
-        <p className="mb-2 text-xl font-bold">Name</p>
-        <p className="mb-6 text-base">{userName}</p>
-        <p className="mb-2 text-xl font-bold">Email</p>
-        <p className="mb-6 text-base">{userEmail}</p>
-        <p className="mb-2 text-xl font-bold">Weight</p>
-        <p className="mb-6 text-base">{userWeight}</p>
-        <div className="flex mt-4">
-          <button
-            className="mr-4 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
-            onClick={editProfile}
-          >
-            Edit
-          </button>
-          <button
-            className="px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
-            onClick={() => {
-              deleteProfile();
-            }}
-          >
-            Delete
-          </button>
+        <div className="flex flex-col items-center">
+          <p className="mb-2 text-xl font-bold">Name</p>
+          <p className="mb-6 text-base">{userName}</p>
+          <p className="mb-2 text-xl font-bold">Email</p>
+          <p className="mb-6 text-base">{userEmail}</p>
+          <p className="mb-2 text-xl font-bold">Display unit</p>
+          <p className="mb-6 text-base">{userWeight}</p>
+          <div className="flex mt-4">
+            <button
+              className="mr-4 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+              onClick={editProfile}
+            >
+              Edit
+            </button>
+            <button
+              className="px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+              onClick={() => {
+                deleteProfile();
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
       {editOpen && (

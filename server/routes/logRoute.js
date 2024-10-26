@@ -27,7 +27,6 @@ router.post("/create-daily-log", authMiddleware, async (req, res) => {
     if (!logExists) {
       const newLogObj = {
         date: req.body.date,
-        type: req.body.type,
         recordId: req.body.id,
         set: [],
       };
@@ -45,7 +44,6 @@ router.post("/create-daily-log", authMiddleware, async (req, res) => {
     let existedLogArray = logExists.logs;
     const newLogObj = {
       date: req.body.date,
-      type: req.body.type,
       recordId: req.body.id,
       set: [],
     };

@@ -164,6 +164,9 @@ const TrainingDetails = ({
               </div>
             ))}
           </div>
+          <button className="mt-2 px-2 bg-orange-500 hover:bg-orange-300 rounded">
+            Delete
+          </button>
         </div>
       </div>
     </div>

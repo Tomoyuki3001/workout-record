@@ -23,7 +23,7 @@ const Login = () => {
     }
     try {
       const response = await axios.post(
-        "https://workout-server-murex.vercel.app/api/user/login",
+        "http://localhost:5000/api/user/login",
         { email, password }
       );
       if (response.data.success) {

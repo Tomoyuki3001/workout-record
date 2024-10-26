@@ -5,7 +5,7 @@ const express = require("express");
 const cors = require("cors");
 
 const corsOptions = {
-  origin: "https://workout-record.vercel.app",
+  origin: ["http://localhost:3000", "https://workout-record.vercel.app"],
 };
 
 const app = express();

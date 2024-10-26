@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Login from "./pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from "./pages/Signin";
-import HomeScreen from "./components/HomeScreen";
-import CreateLogs from "./components/CreateLogs";
+import Home from "./pages/Home";
+import CreateLogs from "./pages/CreateLogs";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LogDetail from "./pages/LogDetail";
 
 const App = () => {
   return (
@@ -17,7 +18,7 @@ const App = () => {
           path="/"
           element={
             <ProtectedRoute>
-              <HomeScreen />
+              <Home />
             </ProtectedRoute>
           }
         />
@@ -34,6 +35,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/detail/:id"
+          element={
+            <ProtectedRoute>
+              <LogDetail />
             </ProtectedRoute>
           }
         />

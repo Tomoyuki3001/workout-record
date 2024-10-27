@@ -148,10 +148,10 @@ const CreateLogs = () => {
           className="flex flex-col items-center text-center justify-center px-4 pt-10"
         >
           <div className="flex">
-            <div className="flex items-center">
+            <div className="flex items-center w-full">
               <label className="font-bold">Date:</label>
               <input
-                className="mx-3 border bg-transparent w-full h-6 bg-white sm:px-5 sm:py-2"
+                className="mx-3 border bg-transparent h-6 w-12 bg-white px-5 py-2"
                 type="date"
                 onChange={(e) => {
                   setDate(e.target.value);

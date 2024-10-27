@@ -10,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const url = "http://localhost:5000";
+  const url = "https://workout-server-murex.vercel.app";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,10 +24,10 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/user/login",
-        { email, password }
-      );
+      const response = await axios.post(`${url}/api/user/login`, {
+        email,
+        password,
+      });
       if (response.data.success) {
         dispatch(setUser());
         toast.success(response.data.message);

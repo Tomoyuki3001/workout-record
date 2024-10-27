@@ -9,10 +9,13 @@ const ProtectedRoute = (props) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const url = "http://localhost:5000";
+  const url = "https://workout-server-murex.vercel.app";
+
   const getUser = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/get-user-info-by-id",
+        `${url}/api/user/get-user-info-by-id`,
         { token: localStorage.getItem("token") },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

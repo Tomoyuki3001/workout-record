@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import BottomNavbar from "./BottomNavbar";
+import BottomNavbar from "../components/BottomNavbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeftLong } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.user);
@@ -120,19 +121,19 @@ const Profile = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between px-4">
           <div className="flex">
-            <NavLink to="/" className="mx-2">
-              <FaArrowLeftLong size={30} />
+            <NavLink to="/">
+              <IoIosArrowBack size={30} />
             </NavLink>
-            <h1 className="text-2xl font-bold">Profile</h1>
           </div>
           <button
-            className="px-4 py-2 text-md font-bold bg-blue-600 hover:bg-blue-300 rounded"
+            className="px-4 py-2 text-md font-bold bg-fuchsia-500 hover:bg-fuchsia-300 rounded"
             onClick={logout}
           >
             Sign out
           </button>
         </div>
-        <div className="flex flex-col items-center mt-20 mb-10">
+        <h1 className="text-2xl font-bold text-center mt-4">Profile</h1>
+        <div className="flex flex-col items-center my-10">
           <img
             className="md:w-1/5 w-2/6 rounded-full"
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -140,21 +141,21 @@ const Profile = () => {
           />
         </div>
         <div className="flex flex-col items-center">
-          <p className="mb-2 text-xl font-bold">Name</p>
-          <p className="mb-6 text-base">{userName}</p>
-          <p className="mb-2 text-xl font-bold">Email</p>
-          <p className="mb-6 text-base">{userEmail}</p>
-          <p className="mb-2 text-xl font-bold">Display unit</p>
-          <p className="mb-6 text-base">{userWeight}</p>
+          <p className="mb-2 text-gray-400">Name</p>
+          <p className="mb-6 text-xl font-bold">{userName}</p>
+          <p className="mb-2 text-gray-400">Email</p>
+          <p className="mb-6 text-xl font-bold">{userEmail}</p>
+          <p className="mb-2 text-gray-400">Display unit</p>
+          <p className="mb-6 text-xl font-bold">{userWeight}</p>
           <div className="flex mt-4">
             <button
-              className="mr-4 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+              className="mr-4 px-4 py-2 text-md font-bold bg-blue-500 mb-4 hover:bg-blue-300 rounded"
               onClick={editProfile}
             >
               Edit
             </button>
             <button
-              className="px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+              className="px-4 py-2 text-md font-bold bg-orange-500 mb-4 hover:bg-orange-300 rounded"
               onClick={() => {
                 deleteProfile();
               }}
@@ -166,20 +167,19 @@ const Profile = () => {
       </div>
       {editOpen && (
         <div className="profile-modal-container w-full flex flex-col items-center">
-          <div className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl">
+          <div className="flex flex-col items-center px-20 py-5 bg-gray-400 rounded-xl">
             <div className="w-full mb-4 flex flex-col items-end">
-              <button>
-                <FontAwesomeIcon
-                  onClick={() => {
-                    setEditOpen(false);
-                  }}
-                  icon={faXmark}
-                />
+              <button
+                onClick={() => {
+                  setEditOpen(false);
+                }}
+              >
+                <IoCloseOutline size={30} />
               </button>
             </div>
             <label className="mb-2 font-bold">Name</label>
             <input
-              className="text-black mb-4"
+              className="text-black mb-4 py-1"
               type="text"
               onChange={(e) => {
                 setName(e.target.value);
@@ -187,13 +187,13 @@ const Profile = () => {
             />
             <label className="mb-2 font-bold">Email</label>
             <input
-              className="text-black mb-4"
+              className="text-black mb-4 py-1"
               type="email"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
-            <label className="font-bold">Weight</label>
+            <label className="font-bold">Display unit</label>
             <div className="flex">
               <div className="mr-4">
                 <label className="text-xl mr-2">kg</label>
@@ -217,7 +217,7 @@ const Profile = () => {
               </div>
             </div>
             <button
-              className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+              className="mt-10 px-4 py-2 text-md font-bold bg-blue-500 mb-4 hover:bg-blue-300 rounded"
               onClick={() => {
                 updateUserProfile();
               }}
@@ -229,13 +229,15 @@ const Profile = () => {
       )}
       {deleteOpen && (
         <div className="profile-modal-container w-full flex flex-col items-center p-8">
-          <div className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl">
+          <div className="flex flex-col items-center px-20 py-10 bg-gray-400 rounded-xl">
             <div>
-              <p>Do you want to delete your account?</p>
+              <p className="text-center font-bold">
+                Do you want to delete your account?
+              </p>
             </div>
             <div className="flex">
               <button
-                className="mt-10 mr-4 px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+                className="mt-10 mr-4 px-4 py-2 text-md font-bold bg-orange-500 mb-4 hover:bg-orange-300 rounded"
                 onClick={() => {
                   deleteUserProfile();
                 }}
@@ -243,7 +245,7 @@ const Profile = () => {
                 Yes
               </button>
               <button
-                className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+                className="mt-10 px-4 py-2 text-md font-bold bg-blue-500 mb-4 hover:bg-blue-300 rounded"
                 onClick={() => {
                   setDeleteOpen(false);
                 }}

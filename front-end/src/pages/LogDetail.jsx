@@ -22,7 +22,7 @@ const LogDetail = () => {
 
   return (
     <section>
-      <NavLink to={"/"} className="bg-[#d5d8dc] px-2 pt-4 pb-2 fixed w-full">
+      <NavLink to={"/"} className="bg-slate-50 px-2 pt-4 pb-2 fixed w-full">
         <IoIosArrowBack size={35} />
       </NavLink>
       <div className="px-4 pt-24">

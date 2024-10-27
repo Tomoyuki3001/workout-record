@@ -7,8 +7,10 @@ const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [weight, setWeight] = useState("kg");
   const navigate = useNavigate();
+  const weight = "kg";
+  // const url = "http://localhost:5000";
+  const url = "https://workout-server-murex.vercel.app";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ const Signin = () => {
       return;
     }
     axios
-      .post("http://localhost:5000/api/user/signup", {
+      .post(`${url}/api/user/signup`, {
         name,
         email,
         password,

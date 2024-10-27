@@ -13,18 +13,17 @@ const CreateLogs = () => {
   const [trainingRecordId, setTrainigRecordId] = useState("");
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteRecordId, setDeleteRecordId] = useState("");
+  // const url = "http://localhost:5000";
+  const url = "https://workout-server-murex.vercel.app";
 
   const fetchLogs = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        "http://localhost:5000/api/log/get-all-records",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${url}/api/log/get-all-records`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setLogs(response.data.data[0].logs);
     } catch (error) {
       console.error("Error fetching logs:", error);
@@ -41,11 +40,7 @@ const CreateLogs = () => {
       "Content-Type": "application/json",
     };
     axios
-      .post(
-        "http://localhost:5000/api/log/create-daily-log",
-        { date, id },
-        { headers }
-      )
+      .post(`${url}/api/log/create-daily-log`, { date, id }, { headers })
       .then(() => {
         fetchLogs();
         window.location.reload();
@@ -57,7 +52,7 @@ const CreateLogs = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/update-training-by-date",
+        `${url}/api/log/update-training-by-date`,
         { newArray: logs },
         {
           headers: {
@@ -77,7 +72,7 @@ const CreateLogs = () => {
     deletedArray.set = array;
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/update-training-by-user",
+        `${url}/api/log/update-training-by-user`,
         { newArray: logs },
         {
           headers: {
@@ -95,7 +90,7 @@ const CreateLogs = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/update-weight-by-training",
+        `${url}/api/log/update-weight-by-training`,
         { newArray: logs },
         {
           headers: {
@@ -114,7 +109,7 @@ const CreateLogs = () => {
     let updatedlog = logs.filter((log) => log.recordId !== id);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/log/delete-log-by-id",
+        `${url}/api/log/delete-log-by-id`,
         { newLogs: updatedlog },
         {
           headers: {
@@ -131,11 +126,13 @@ const CreateLogs = () => {
 
   function formatDate(isoDate) {
     const date = new Date(isoDate);
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
+    const month = date
+      .toLocaleString("en-US", { month: "long" })
+      .padStart(2, "0");
+    const day = date.getDate();
     const year = date.getFullYear();
 
-    return `${month}/${day}/${year}`;
+    return `${month} ${day}, ${year}`;
   }
 
   useEffect(() => {
@@ -162,19 +159,21 @@ const CreateLogs = () => {
                 }}
                 required
               />
-              <button className="px-4 py-2 font-bold bg-blue-600 hover:bg-blue-300 rounded">
+              <button className="px-4 py-2 font-bold bg-blue-500 hover:bg-blue-300 rounded">
                 Add
               </button>
             </div>
           </div>
           <div>
-            <h2 className="text-lg my-2">Add or edit a record</h2>
+            <h2 className="text-lg my-2 text-gray-500">
+              Add or delete a record
+            </h2>
           </div>
         </form>
         <div class="pb-32 px-8 flex flex-col items-center text-center md:px-96">
           {logs.map((log) => (
             <details
-              className="flex my-3 px-2 py-3 justify-around border bg-gray-700 w-full"
+              className="flex my-3 px-2 py-4 justify-around border w-full"
               key={log.date}
               onClick={() => {
                 setTrainigRecordId(log.recordId);
@@ -183,29 +182,30 @@ const CreateLogs = () => {
             >
               <summary className="flex justify-around">
                 <div className="text-left">
-                  <p>Date</p>
-                  <p>{formatDate(log.date)}</p>
+                  <p className="font-bold">{formatDate(log.date)}</p>
                 </div>
-                {/* <div className="flex flex-col items-end">
-                    <button
-                      className="mt-2 px-2 bg-orange-500 hover:bg-orange-300 rounded"
-                      onClick={() => {
-                        setDeleteModal(true);
-                        setDeleteRecordId(log.recordId);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </div> */}
+                <div className="flex flex-col items-end">
+                  <button
+                    className="px-2 bg-orange-400 hover:bg-orange-300 rounded"
+                    onClick={() => {
+                      setDeleteModal(true);
+                      setDeleteRecordId(log.recordId);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
                 {deleteModal && (
                   <div className="profile-modal-container w-full flex flex-col items-center p-8">
-                    <div className="flex flex-col items-center px-20 py-10 bg-gray-600 rounded-xl">
+                    <div className="flex flex-col items-center px-20 py-10 bg-gray-500 rounded-xl">
                       <div>
-                        <p>Do you want to delete this date?</p>
+                        <p className="font-bold">
+                          Do you want to delete this record?
+                        </p>
                       </div>
                       <div className="flex">
                         <button
-                          className="mt-10 mr-4 px-4 py-2 text-md font-bold bg-orange-600 mb-4 hover:bg-orange-300 rounded"
+                          className="mt-10 mr-4 px-4 py-2 text-md font-bold bg-orange-500 mb-4 hover:bg-orange-300 rounded"
                           onClick={() => {
                             logDelete(deleteRecordId);
                           }}
@@ -213,7 +213,7 @@ const CreateLogs = () => {
                           Yes
                         </button>
                         <button
-                          className="mt-10 px-4 py-2 text-md font-bold bg-blue-600 mb-4 hover:bg-blue-300 rounded"
+                          className="mt-10 px-4 py-2 text-md font-bold bg-blue-500 mb-4 hover:bg-blue-300 rounded"
                           onClick={() => {
                             setDeleteModal(false);
                           }}

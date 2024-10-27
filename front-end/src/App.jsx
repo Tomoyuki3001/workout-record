@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import CreateLogs from "./pages/CreateLogs";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LogDetail from "./pages/LogDetail";
 

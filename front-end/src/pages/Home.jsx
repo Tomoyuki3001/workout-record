@@ -8,8 +8,8 @@ import { NavLink } from "react-router-dom";
 const Home = () => {
   const [logs, setLogs] = useState([]);
   const { user } = useSelector((state) => state.user);
-  // const userWeight = user && user.weight;
-  const url = "http://localhost:5000";
+  // const url = "http://localhost:5000";
+  const url = "https://workout-server-murex.vercel.app";
 
   const fetchLogs = async () => {
     try {
@@ -31,33 +31,31 @@ const Home = () => {
 
   function formatDate(isoDate) {
     const date = new Date(isoDate);
-    const month = date
-      .toLocaleString("en-US", { month: "long" })
-      .padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const day = date.getDate();
     const year = date.getFullYear();
 
     return `${month} ${day}, ${year}`;
   }
 
   function createTrainingList(array) {
-    let training = "";
-    array.map((value) => (training += value.name + ", "));
-    return training;
+    return array.map((value) => value.name).join(", ");
   }
 
   return (
     <section>
       <div>
-        <div className="w-full pt-10 pb-4 px-4 fixed">
+        <div className="w-full pt-10 pb-4 px-4 fixed bg-slate-50">
           <div className="flex justify-between">
-            <h1 className="text-2xl font-bold mr-2">Workout Tracking</h1>
-            <NavLink to="/profile">
+            <h1 className="text-2xl font-bold mr-2 text-fuchsia-700">
+              Workout Tracking
+            </h1>
+            <NavLink to="/profile" className="text-fuchsia-700">
               <FaUserCircle size={50} />
             </NavLink>
           </div>
           <div className="text-center">
-            <h2 className="text-lg">Recent activity</h2>
+            <h2 className="text-xl text-gray-500">Recent activity</h2>
           </div>
         </div>
         <div className="py-36 px-8 flex flex-col items-center text-center md:px-96">

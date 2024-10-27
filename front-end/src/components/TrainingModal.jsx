@@ -40,7 +40,7 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
           }}
         />
         <button
-          className=" w-1/4 mt-4 px-2 bg-blue-600 hover:bg-blue-300 rounded"
+          className="mt-4 px-2 bg-blue-500 hover:bg-blue-300 rounded"
           onClick={() => {}}
         >
           Save

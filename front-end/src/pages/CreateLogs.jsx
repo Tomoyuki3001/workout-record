@@ -151,7 +151,7 @@ const CreateLogs = () => {
             <div className="flex items-center">
               <label className="font-bold">Date:</label>
               <input
-                className="mx-3 border bg-transparent w-11/12 h-6"
+                className="mx-3 border bg-transparent w-full h-6"
                 type="date"
                 placeholder="mm/dd/yyyy"
                 onChange={(e) => {

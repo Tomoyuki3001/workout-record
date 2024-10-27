@@ -43,9 +43,9 @@ const Home = () => {
   }
 
   return (
-    <section>
+    <section className="text-slate-700">
       <div>
-        <div className="w-full pt-4 pb-2 px-4 fixed bg-slate-50">
+        <div className="w-full pt-4 pb-2 px-4 fixed bg-slate-50 drop-shadow-xl">
           <div className="flex justify-between">
             <h1 className="text-2xl font-bold mr-2 text-fuchsia-700">
               Workout Tracking
@@ -58,17 +58,21 @@ const Home = () => {
             <h2 className="text-lg text-gray-500">Recent activity</h2>
           </div>
         </div>
-        <div className="py-36 px-4 flex flex-col items-center text-center md:px-96">
+        <div className="py-36 px-4 flex flex-col items-center text-center md:px-96 bg-slate-100">
           {logs.map((log) => (
             <NavLink
               to={`/detail/${log.recordId}`}
               state={{ log }}
-              className="w-full border text-left p-2 my-2"
+              className="w-full border text-left p-3 my-2 bg-white"
             >
               <p className="text-gray-400">Date</p>
-              <p className="text mb-2 font-bold">{formatDate(log.date)}</p>
+              <p className="text-slate-700 mb-2 font-bold">
+                {formatDate(log.date)}
+              </p>
               <p className="text-gray-400">Training</p>
-              <p className="font-bold">{createTrainingList(log.set)}</p>
+              <p className="text-slate-700 font-bold">
+                {createTrainingList(log.set)}
+              </p>
             </NavLink>
           ))}
         </div>

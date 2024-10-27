@@ -67,10 +67,10 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="mt-6 px-6 py-3 text-xl font-bold bg-blue-600 mb-6 hover:bg-blue-300 rounded">
+        <button className="mt-6 px-6 py-3 text-xl font-bold bg-blue-500 mb-6 hover:bg-blue-300 rounded">
           Log in
         </button>
-        <Link className="border-b text-base" to="/signup">
+        <Link className="text-xl font-bold underline" to="/signup">
           Sign up
         </Link>
       </form>

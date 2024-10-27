@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { IoCloseOutline } from "react-icons/io5";
 
 const WeightModal = ({
   setWeightOpen,
@@ -28,13 +27,12 @@ const WeightModal = ({
   return (
     <div className="weight-modal">
       <div className="flex flex-col items-end">
-        <button>
-          <FontAwesomeIcon
-            onClick={() => {
-              setWeightOpen(false);
-            }}
-            icon={faXmark}
-          />
+        <button
+          onClick={() => {
+            setWeightOpen(false);
+          }}
+        >
+          <IoCloseOutline size={30} style={{ color: "#ffffff" }} />
         </button>
       </div>
       <form
@@ -58,7 +56,7 @@ const WeightModal = ({
             setRep(e.target.value);
           }}
         />
-        <button className=" w-1/4 mt-4 px-2 bg-blue-600 hover:bg-blue-300 rounded">
+        <button className="mt-4 px-2 bg-blue-600 hover:bg-blue-300 rounded">
           Save
         </button>
       </form>

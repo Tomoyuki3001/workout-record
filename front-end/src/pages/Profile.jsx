@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import BottomNavbar from "../components/BottomNavbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -179,7 +177,7 @@ const Profile = () => {
             </div>
             <label className="mb-2 font-bold">Name</label>
             <input
-              className="text-black mb-4 py-1"
+              className="mb-4 py-1"
               type="text"
               onChange={(e) => {
                 setName(e.target.value);
@@ -187,7 +185,7 @@ const Profile = () => {
             />
             <label className="mb-2 font-bold">Email</label>
             <input
-              className="text-black mb-4 py-1"
+              className="mb-4 py-1"
               type="email"
               onChange={(e) => {
                 setEmail(e.target.value);

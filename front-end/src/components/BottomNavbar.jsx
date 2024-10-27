@@ -19,7 +19,7 @@ const BottomNavbar = () => {
   ];
 
   return (
-    <Nav className="w-full px-10 fixed bottom-0 pb-4 pt-1 bg-slate-100 md:px-48">
+    <Nav className="w-full px-10 fixed bottom-0 pb-4 pt-1 bg-slate-50 md:px-48 border">
       <div className="w-full flex justify-around">
         {tabs.map((tab) => (
           <NavLink

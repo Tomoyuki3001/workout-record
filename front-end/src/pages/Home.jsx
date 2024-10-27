@@ -45,20 +45,20 @@ const Home = () => {
   return (
     <section>
       <div>
-        <div className="w-full pt-10 pb-4 px-4 fixed bg-slate-50">
+        <div className="w-full pt-4 pb-2 px-4 fixed bg-slate-50">
           <div className="flex justify-between">
             <h1 className="text-2xl font-bold mr-2 text-fuchsia-700">
               Workout Tracking
             </h1>
             <NavLink to="/profile" className="text-fuchsia-700">
-              <FaUserCircle size={50} />
+              <FaUserCircle size={40} />
             </NavLink>
           </div>
           <div className="text-center">
-            <h2 className="text-xl text-gray-500">Recent activity</h2>
+            <h2 className="text-lg text-gray-500">Recent activity</h2>
           </div>
         </div>
-        <div className="py-36 px-8 flex flex-col items-center text-center md:px-96">
+        <div className="py-36 px-4 flex flex-col items-center text-center md:px-96">
           {logs.map((log) => (
             <NavLink
               to={`/detail/${log.recordId}`}

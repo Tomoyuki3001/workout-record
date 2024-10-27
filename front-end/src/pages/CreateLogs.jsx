@@ -170,7 +170,7 @@ const CreateLogs = () => {
             </h2>
           </div>
         </form>
-        <div class="pb-32 px-8 flex flex-col items-center text-center md:px-96">
+        <div class="pb-32 px-4 flex flex-col items-center text-center md:px-96">
           {logs.map((log) => (
             <details
               className="flex my-3 px-2 py-4 justify-around border w-full"

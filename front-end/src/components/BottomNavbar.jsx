@@ -9,17 +9,17 @@ const BottomNavbar = () => {
     {
       route: "/",
       label: "Home",
-      icon: <TfiHome size={40} />,
+      icon: <TfiHome size={30} />,
     },
     {
       route: "/logs",
       label: "Create",
-      icon: <GoPlus size={40} />,
+      icon: <GoPlus size={30} />,
     },
   ];
 
   return (
-    <Nav className="w-full px-10 fixed bottom-0 pb-7 pt-2 bg-slate-100 md:px-48">
+    <Nav className="w-full px-10 fixed bottom-0 pb-4 pt-2 bg-slate-100 md:px-48">
       <div className="w-full flex justify-around">
         {tabs.map((tab) => (
           <NavLink

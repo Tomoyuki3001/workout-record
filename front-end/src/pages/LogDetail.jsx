@@ -25,7 +25,7 @@ const LogDetail = () => {
       <NavLink to={"/"} className="bg-slate-50 px-2 pt-4 pb-2 fixed w-full">
         <IoIosArrowBack size={35} />
       </NavLink>
-      <div className="px-4 pt-24">
+      <div className="px-4 py-24">
         <p className="text-gray-400">Date</p>
         <p className="text-xl mb-4 font-bold">{formatDate(log.date)}</p>
         <p className="text-gray-400">Training</p>

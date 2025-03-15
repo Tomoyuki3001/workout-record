@@ -25,7 +25,7 @@ const WeightModal = ({
     setWeightOpen(false);
   };
   return (
-    <div className="weight-modal">
+    <div className="modal">
       <div className="flex flex-col items-end">
         <button
           onClick={() => {

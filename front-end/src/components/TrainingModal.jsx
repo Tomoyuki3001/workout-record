@@ -16,7 +16,7 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
     setOpen(false);
   };
   return (
-    <div className="training-modal">
+    <div className="modal">
       <div className="flex flex-col items-end">
         <button>
           <FontAwesomeIcon

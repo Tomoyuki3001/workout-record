@@ -14,28 +14,21 @@
   width: 100%;
 }
 
-.training-modal {
-  max-width: 20rem;
-  padding: 1rem;
-  border: 0;
-  border-radius: 0.5rem;
-  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
-  background-color: rgb(31, 41, 55, 0.5);
-}
-
-.weight-modal {
+.modal {
   max-width: 20rem;
   padding: 2rem;
   border: 0;
   border-radius: 0.5rem;
   box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
-  background-color: rgb(31, 41, 55, 0.9);
+  background-color: rgb(31, 41, 55, 0.8);
   position: fixed;
-  top: 20;
-  left: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .profile-modal-container {
-  position: fixed;
-  top: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

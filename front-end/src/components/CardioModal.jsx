@@ -16,7 +16,7 @@ const CardioModal = ({ setCardioOpen, trainingArray, createTraining }) => {
     setCardioOpen(false);
   };
   return (
-    <div className="training-modal">
+    <div className="modal">
       <div className="flex flex-col items-end">
         <button>
           <FontAwesomeIcon

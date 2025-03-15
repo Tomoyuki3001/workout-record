@@ -71,7 +71,7 @@ const TrainingDetails = ({
           <div className="flex flex-col">
             {trainingArray.map((training) => (
               <div className="px-2 mb-4 w-full">
-                <hr class="hr" />
+                <hr className="hr" />
                 <div className="flex flex-col items-end my-2">
                   {!training.cardio ? (
                     <div className="w-full flex justify-between">

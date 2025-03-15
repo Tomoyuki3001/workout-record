@@ -16,7 +16,7 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
     setOpen(false);
   };
   return (
-    <div className="modal">
+    <div className="modal-component">
       <div className="flex flex-col items-end">
         <button>
           <FontAwesomeIcon
@@ -24,6 +24,7 @@ const TrainingModal = ({ setOpen, trainingArray, createTraining }) => {
               setOpen(false);
             }}
             icon={faXmark}
+            className="text-white"
           />
         </button>
       </div>

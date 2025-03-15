@@ -22,7 +22,7 @@ const DistanceModal = ({
     setDistanceOpen(false);
   };
   return (
-    <div className="modal">
+    <div className="modal-component">
       <div className="flex flex-col items-end">
         <button>
           <FontAwesomeIcon
@@ -30,6 +30,7 @@ const DistanceModal = ({
               setDistanceOpen(false);
             }}
             icon={faXmark}
+            className="text-white"
           />
         </button>
       </div>
